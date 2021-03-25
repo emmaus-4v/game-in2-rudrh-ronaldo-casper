@@ -1,5 +1,3 @@
-Deze game is gebaseerd op het template voor 4HV van het Emmauscollege Rotterdam
-
 ## Mijn spel: *naam van het spel*
 Gemaakt door:
 - *Rudrh Kapoor*
@@ -10,12 +8,12 @@ Gemaakt door:
 
 Basis: uitleg, spelen, afgaan en punten
 - [x] maak index.html, style.css en script.js met canvas
-- [ ] teken speler
-- [ ] beweeg speler
-- [ ] ... *(vul zelf aan)*
-- [ ] punten op scherm zetten
-- [ ] punten kunnen scoren
-- [ ] uitlegscherm
+- [ ] teken speler Rudrh
+- [ ] beweeg speler Casper
+- [ ] .
+- [ ] punten op scherm zetten Ronaldo
+- [ ] punten kunnen scoren Ronaldo
+- [ ] uitlegscherm Rudrh
 
 Uitbreiding: *bedenk iets, bijvoorbeeld meer tegenstanders*
 - [ ] *later uitwerken*
