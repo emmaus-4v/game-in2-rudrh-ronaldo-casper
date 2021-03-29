@@ -28,6 +28,7 @@ var spelerY = 680; // y-positie van speler
 var kogelX = 0;    // x-positie van kogel
 var kogelY = 0;    // y-positie van kogel
 
+
 var vijandX = 0;   // x-positie van vijand
 var vijandY = 0;   // y-positie van vijand
 
@@ -104,10 +105,22 @@ var beweegKogel = function() {
  * Kijkt wat de toetsen/muis etc zijn.
  * Updatet globale variabele spelerX en spelerY
  */
+<<<<<<< HEAD
 var beweegSpeler = function() {
     if(keyCode === 83){
         spelerY--;
     };
+=======
+
+ function keyTyped(){
+     if(key === w){
+         spelerY++;
+     }
+ }
+
+var beweegSpeler = function keyPressed() {
+
+>>>>>>> b3f5edaf944aaa1a265087864f2606759c450711
     
 };
 
