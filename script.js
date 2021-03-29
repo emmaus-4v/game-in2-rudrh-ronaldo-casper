@@ -108,14 +108,17 @@ var beweegKogel = function() {
 
 var beweegSpeler = function()  {
      if (keyIsPressed && keyCode === 68) {
-        spelerX += 5;
+        spelerX+= 5;
      }; 
      if (keyIsPressed && keyCode === 65 && spelerX > 50) {
-        spelerX -= 5;
+        spelerX-= 5;
      }; 
-     if (keyIsPressed && keyCode === 32 && spelerY > 600) {
-        spelerY -= 5;
-     }; 
+     if (keyIsPressed && keyCode === 32 && spelerY > 500) {
+         spelerY-= 5;
+     } else if (spelerY <= 500) {
+                spelerY = 680;
+     };
+
 };
 
 
@@ -175,8 +178,15 @@ function draw() {
       beweegVijand();
       beweegKogel();
       beweegSpeler();
+<<<<<<< HEAD
       score = score + 1/2; //iedere seconde wordt er 25 aan de score toegevoegd
       round(score); //afronden werkt nu niet 
+=======
+      
+    fill(0,0,0)
+    textSize(100) 
+    text("score", 100, 250, 25, 25 ); //tekent score 
+>>>>>>> e23f0cf59b2b0b8982a6dc78ea15acace5d4d1e1
     
       if (checkVijandGeraakt()) {
         // punten erbij
