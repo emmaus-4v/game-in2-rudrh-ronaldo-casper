@@ -106,6 +106,7 @@ var beweegKogel = function() {
  * Updatet globale variabele spelerX en spelerY
  */
 
+<<<<<<< HEAD
 var beweegSpeler = function() {
     if (keyIsPressed && keyCode === 87) {
         spelerY -= 2;
@@ -115,6 +116,17 @@ var beweegSpeler = function() {
         spelerX -= 5;
     };
 
+=======
+ function keyTyped(){
+     if(key === w){
+         spelerY++;
+     }
+ }
+
+var beweegSpeler = function keyPressed() {
+
+    
+>>>>>>> 36d8cd573de24eed3f1a5e9553b83d70d7fa2ab6
 };
 
 
@@ -178,6 +190,7 @@ function draw() {
       if (checkVijandGeraakt()) {
         // punten erbij
         // nieuwe vijand maken
+        score = score + 1;
       }
       
       if (checkSpelerGeraakt()) {
