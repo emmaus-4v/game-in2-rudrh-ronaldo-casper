@@ -7,19 +7,11 @@ Gemaakt door:
 ## Mijn planning
 
 Basis: uitleg, spelen, afgaan en punten
-- [x] maak index.html, style.css en script.js met canvas
-- [ ] teken speler Rudrh
-- [ ] beweeg speler Casper
-- [ ] beweeg speler niet op plekken waar die niet mag Casper
-- [ ] teken vijanden
-- [ ] teken achtergrond
-- [ ] teken mappen
-- [ ] teken menu
-- [ ] teken items
-- [ ] teken wapens
-- [ ] punten op scherm zetten Ronaldo
-- [ ] punten kunnen scoren Ronaldo
-- [ ] uitlegscherm Rudrh
+- [x] maak index.html, style.css en script.js met canvas 
+- [ ] beweeg speler 
+- [ ] punten op scherm zetten 
+- [ ] punten kunnen scoren 
+- [ ] uitlegscherm 
 
 Uitbreiding: *bedenk iets, bijvoorbeeld meer tegenstanders*
 - [ ] *later uitwerken*
