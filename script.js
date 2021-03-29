@@ -176,6 +176,10 @@ function draw() {
       beweegKogel();
       beweegSpeler();
       
+    fill(0,0,0)
+    textSize(100) 
+    text("score", 100, 250, 25, 25 ); //tekent score 
+    
       if (checkVijandGeraakt()) {
         // punten erbij
         // nieuwe vijand maken
