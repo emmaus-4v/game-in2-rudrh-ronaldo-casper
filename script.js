@@ -108,14 +108,17 @@ var beweegKogel = function() {
 
 var beweegSpeler = function()  {
      if (keyIsPressed && keyCode === 68) {
-        spelerX += 5;
+        spelerX+= 5;
      }; 
      if (keyIsPressed && keyCode === 65 && spelerX > 50) {
-        spelerX -= 5;
+        spelerX-= 5;
      }; 
-     if (keyIsPressed && keyCode === 32 && spelerY > 600) {
-        spelerY -= 5;
-     }; 
+     if (keyIsPressed && keyCode === 32 && spelerY > 500) {
+         spelerY-= 5;
+     } else if (spelerY <= 500) {
+                spelerY = 680;
+     };
+
 };
 
 
