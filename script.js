@@ -105,23 +105,16 @@ var beweegKogel = function() {
  * Kijkt wat de toetsen/muis etc zijn.
  * Updatet globale variabele spelerX en spelerY
  */
-<<<<<<< HEAD
+
 var beweegSpeler = function() {
-    if(keyCode === 83){
-        spelerY--;
+    if (keyIsPressed && keyCode === 87) {
+        spelerY -= 2;
+    }; if (keyIsPressed && keyCode === 68) {
+        spelerX += 5;
+    }; if (keyIsPressed && keyCode === 65) {
+        spelerX -= 5;
     };
-=======
 
- function keyTyped(){
-     if(key === w){
-         spelerY++;
-     }
- }
-
-var beweegSpeler = function keyPressed() {
-
->>>>>>> b3f5edaf944aaa1a265087864f2606759c450711
-    
 };
 
 
