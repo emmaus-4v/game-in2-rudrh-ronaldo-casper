@@ -105,12 +105,6 @@ var beweegKogel = function() {
  * Kijkt wat de toetsen/muis etc zijn.
  * Updatet globale variabele spelerX en spelerY
  */
-<<<<<<< HEAD
-var beweegSpeler = function() {
-    if(keyCode === 83){
-        spelerY--;
-    };
-=======
 
  function keyTyped(){
      if(key === w){
@@ -120,7 +114,6 @@ var beweegSpeler = function() {
 
 var beweegSpeler = function keyPressed() {
 
->>>>>>> b3f5edaf944aaa1a265087864f2606759c450711
     
 };
 
@@ -185,6 +178,7 @@ function draw() {
       if (checkVijandGeraakt()) {
         // punten erbij
         // nieuwe vijand maken
+        score = score + 1;
       }
       
       if (checkSpelerGeraakt()) {
