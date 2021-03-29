@@ -175,11 +175,13 @@ function draw() {
       beweegVijand();
       beweegKogel();
       beweegSpeler();
-      
+      score = score + 1/2; //iedere seconde wordt er 25 aan de score toegevoegd
+      round(score); //afronden werkt nu niet 
+    
       if (checkVijandGeraakt()) {
         // punten erbij
         // nieuwe vijand maken
-        score = score + 1;
+        score = score + 100; // wanneer een vijand geraakt is wordt er 100 aan de score toegevoegd
       }
       
       if (checkSpelerGeraakt()) {
@@ -191,6 +193,10 @@ function draw() {
       tekenVijand(vijandX, vijandY);
       tekenKogel(kogelX, kogelY);
       tekenSpeler(spelerX, spelerY);
+
+    fill(255,0,0) //maakt de tekst rood
+    textSize(50) //bepaalt de grootte van de tekst 
+    text("score:" + score, 25, 30, 25, 50); //zet de score op het beeld
 
       if (checkGameOver()) {
         spelStatus = GAMEOVER;
