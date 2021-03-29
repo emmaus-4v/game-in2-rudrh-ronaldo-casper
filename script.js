@@ -34,8 +34,11 @@ var vijandY = 0;   // y-positie van vijand
 
 var score = 0; // aantal behaalde punten
 
-
-
+var springStatus = false;
+var valStatus = false;
+var sprongHoogte = 680;
+var sprongSnelheid = 1;
+var grondHoogte = 680;
 
 
 /* ********************************************* */
@@ -107,17 +110,35 @@ var beweegKogel = function() {
  */
 
 var beweegSpeler = function()  {
-     if (keyIsPressed && keyCode === 68) {
+     if (keyIsDown(68)) {
         spelerX+= 5;
-     }; 
-     if (keyIsPressed && keyCode === 65 && spelerX > 50) {
+     } 
+     if (keyIsDown(65) && spelerX > 50) {
         spelerX-= 5;
-     }; 
-     if (keyIsPressed && keyCode === 32 && spelerY > 500) {
-         spelerY-= 5;
-     } else if (spelerY <= 500) {
-                spelerY = 680;
-     };
+     } 
+     if (springStatus === false) {
+         sprongHoogte = spelerY - 200;
+     }
+     if (keyIsDown(32) && springStatus === false && valStatus === false) {
+         springStatus = true
+     }
+     if (springStatus === true) {
+         spelerY = spelerY - Math.pow(sprongSnelheid, 2);
+         sprongSnelheid = sprongSnelheid + 0.000008;
+     }
+     if (spelerY <= sprongHoogte) {
+         valStatus = true;
+         springStatus = false;
+     }
+     if (valStatus === true && spelerY < grondHoogte) {
+         spelerY = spelerY + Math.pow(sprongSnelheid, 2);
+         sprongSnelheid = sprongSnelheid + 0.000008;
+     }
+     if (spelerY >= grondHoogte) {
+         valStatus = false;
+         sprongSnelheid = 3.3;
+         spelerY = grondHoogte;
+     }
 
 };
 
@@ -178,15 +199,8 @@ function draw() {
       beweegVijand();
       beweegKogel();
       beweegSpeler();
-<<<<<<< HEAD
       score = score + 1/2; //iedere seconde wordt er 25 aan de score toegevoegd
       round(score); //afronden werkt nu niet 
-=======
-      
-    fill(0,0,0)
-    textSize(100) 
-    text("score", 100, 250, 25, 25 ); //tekent score 
->>>>>>> e23f0cf59b2b0b8982a6dc78ea15acace5d4d1e1
     
       if (checkVijandGeraakt()) {
         // punten erbij
