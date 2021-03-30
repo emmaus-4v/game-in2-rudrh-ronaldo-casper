@@ -8,10 +8,15 @@ Gemaakt door:
 
 Basis: uitleg, spelen, afgaan en punten
 - [x] maak index.html, style.css en script.js met canvas 
-- [ ] beweeg speler 
-- [ ] punten op scherm zetten 
+- [x] beweeg speler 
+- [x] punten op scherm zetten 
 - [ ] punten kunnen scoren 
 - [ ] uitlegscherm 
+- [ ] beweeg vijand
+- [ ] beweeg kogel
+- [ ] teken speler
+- [ ] victory of defeat scherm
+- [ ] menuscherm
 
 Uitbreiding: *bedenk iets, bijvoorbeeld meer tegenstanders*
 - [ ] *later uitwerken*

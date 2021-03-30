@@ -124,7 +124,7 @@ var beweegSpeler = function()  {
      }
      if (springStatus === true) {
          spelerY = spelerY - Math.pow(sprongSnelheid, 2);
-         sprongSnelheid = sprongSnelheid + 0.000008;
+         sprongSnelheid = sprongSnelheid + 0.0000008;
      }
      if (spelerY <= sprongHoogte) {
          valStatus = true;
@@ -132,11 +132,11 @@ var beweegSpeler = function()  {
      }
      if (valStatus === true && spelerY < grondHoogte) {
          spelerY = spelerY + Math.pow(sprongSnelheid, 2);
-         sprongSnelheid = sprongSnelheid + 0.000008;
+         sprongSnelheid = sprongSnelheid + 0.0000008;
      }
      if (spelerY >= grondHoogte) {
          valStatus = false;
-         sprongSnelheid = 3.3;
+         sprongSnelheid = 3;
          spelerY = grondHoogte;
      }
 
