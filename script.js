@@ -32,7 +32,7 @@ var kogelY = 0;    // y-positie van kogel
 var vijandX = 0;   // x-positie van vijand
 var vijandY = 0;   // y-positie van vijand
 
-var score = 0; // aantal behaalde punten
+var score = 1; // aantal behaalde punten
 
 var springStatus = false;
 var valStatus = false;
@@ -110,16 +110,16 @@ var beweegKogel = function() {
  */
 
 var beweegSpeler = function()  {
-     if (keyIsDown(68)) {
+     if (keyIsDown(68) || keyIsDown(39)) {
         spelerX+= 5;
      } 
-     if (keyIsDown(65) && spelerX > 50) {
+     if (keyIsDown(65) && spelerX > 50 || keyIsDown(37) && spelerX > 50) {
         spelerX-= 5;
      } 
      if (springStatus === false) {
          sprongHoogte = spelerY - 200;
      }
-     if (keyIsDown(32) && springStatus === false && valStatus === false) {
+     if (keyIsDown(32) && springStatus === false && valStatus === false || keyIsDown(38) && springStatus === false && valStatus === false) {
          springStatus = true
      }
      if (springStatus === true) {
@@ -199,7 +199,7 @@ function draw() {
       beweegVijand();
       beweegKogel();
       beweegSpeler();
-      score = score + 1/2; //iedere seconde wordt er 25 aan de score toegevoegd
+      score = score / 50; //iedere seconde wordt er 1 per seconde aan de score toegevoegd
       round(score); //afronden werkt nu niet 
     
       if (checkVijandGeraakt()) {
@@ -220,7 +220,7 @@ function draw() {
 
     fill(255,0,0) //maakt de tekst rood
     textSize(50) //bepaalt de grootte van de tekst 
-    text("score:" + score, 25, 30, 25, 50); //zet de score op het beeld
+    text("tijd:" + score, 25, 30, 25, 50); //zet de score op het beeld
 
       if (checkGameOver()) {
         spelStatus = GAMEOVER;
