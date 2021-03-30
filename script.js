@@ -110,16 +110,16 @@ var beweegKogel = function() {
  */
 
 var beweegSpeler = function()  {
-     if (keyIsDown(68)) {
+     if (keyIsDown(68) || keyIsDown(39)) {
         spelerX+= 5;
      } 
-     if (keyIsDown(65) && spelerX > 50) {
+     if (keyIsDown(65) && spelerX > 50 || keyIsDown(37) && spelerX > 50) {
         spelerX-= 5;
      } 
      if (springStatus === false) {
          sprongHoogte = spelerY - 200;
      }
-     if (keyIsDown(32) && springStatus === false && valStatus === false) {
+     if (keyIsDown(32) && springStatus === false && valStatus === false || keyIsDown(38) && springStatus === false && valStatus === false) {
          springStatus = true
      }
      if (springStatus === true) {
