@@ -142,6 +142,13 @@ var beweegSpeler = function()  {
 
 };
 
+var tekenScore = function() {
+fill(255,0,0) //maakt de tekst rood
+textSize(50) //bepaalt de grootte van de tekst 
+text("tijd:" + score, 25, 30, 25, 50); //zet de score op het beeld
+score = score / 50; //iedere seconde wordt er 1 per seconde aan de score toegevoegd
+round(score); //afronden werkt nu niet 
+};
 
 /**
  * Zoekt uit of de vijand is geraakt
@@ -199,8 +206,7 @@ function draw() {
       beweegVijand();
       beweegKogel();
       beweegSpeler();
-      score = score / 50; //iedere seconde wordt er 1 per seconde aan de score toegevoegd
-      round(score); //afronden werkt nu niet 
+      
     
       if (checkVijandGeraakt()) {
         // punten erbij
@@ -217,10 +223,9 @@ function draw() {
       tekenVijand(vijandX, vijandY);
       tekenKogel(kogelX, kogelY);
       tekenSpeler(spelerX, spelerY);
+      tekenScore();
 
-    fill(255,0,0) //maakt de tekst rood
-    textSize(50) //bepaalt de grootte van de tekst 
-    text("tijd:" + score, 25, 30, 25, 50); //zet de score op het beeld
+    
 
       if (checkGameOver()) {
         spelStatus = GAMEOVER;
