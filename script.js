@@ -32,12 +32,8 @@ var kogelY = 0;    // y-positie van kogel
 var vijandX = 0;   // x-positie van vijand
 var vijandY = 0;   // y-positie van vijand
 
-<<<<<<< HEAD
 var score = 0; // aantal behaalde punten
 var tijd = 1; //aantal secondes gespeeld
-=======
-var score = 2000; // aantal behaalde punten
->>>>>>> b22385cbc74ff9b997554d3b9f86c1873f36144f
 
 var springStatus = false;
 var valStatus = false;
@@ -211,17 +207,15 @@ function draw() {
       beweegVijand();
       beweegKogel();
       beweegSpeler();
-<<<<<<< HEAD
-      tijd = tijd + 1/ 50; //iedere seconde wordt er 1 per seconde aan de score toegevoegd
-      Math.ceil(tijd); //afronden werkt nu niet 
-=======
-<<<<<<< HEAD
-      score = score - (1/50); //iedere seconde wordt er 1 per seconde aan de score toegevoegd
-      round(score); //afronden werkt nu niet 
-=======
       
->>>>>>> a76610ff4c90bb2f88431721e2aa6c300118867f
->>>>>>> b22385cbc74ff9b997554d3b9f86c1873f36144f
+   
+      tijd = tijd + 1; //iedere seconde wordt er 1 per seconde aan de score toegevoegd
+      Math.ceil(tijd); //afronden werkt nu niet 
+      
+      
+      score = score - 1; //iedere seconde wordt er 1 per seconde aan de score toegevoegd
+      round(score); //afronden werkt nu niet 
+
     
       if (checkVijandGeraakt()) {
         // punten erbij
@@ -240,17 +234,11 @@ function draw() {
       tekenSpeler(spelerX, spelerY);
       tekenScore();
 
-<<<<<<< HEAD
-    fill(255,0,0) //maakt de tekst rood
-    textSize(50) //bepaalt de grootte van de tekst 
-<<<<<<< HEAD
-    text("Tijd:" + tijd, 25, 30, 25, 50); //zet de score op het beeld
-=======
-    text("Score:" + score, 25, 30, 25, 50); //zet de score op het beeld
-=======
-    
->>>>>>> a76610ff4c90bb2f88431721e2aa6c300118867f
->>>>>>> b22385cbc74ff9b997554d3b9f86c1873f36144f
+
+      fill(255,0,0) //maakt de tekst rood
+      textSize(50) //bepaalt de grootte van de tekst 
+      text("Tijd:" + tijd, 25, 30, 25, 50); //zet de score op het beeld
+
 
       if (checkGameOver()) {
         spelStatus = GAMEOVER;
