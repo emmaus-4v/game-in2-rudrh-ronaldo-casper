@@ -25,8 +25,8 @@ var spelStatus = SPELEN;
 var spelerX = 50; // x-positie van speler
 var spelerY = 680; // y-positie van speler
 
-var kogelX = 0;    // x-positie van kogel
-var kogelY = 0;    // y-positie van kogel
+var kogelX = 60;    // x-positie van kogel
+var kogelY = 680;    // y-positie van kogel
 
 
 var vijandX = 0;   // x-positie van vijand
@@ -50,7 +50,7 @@ var grondHoogte = 680;
  * Tekent het speelveld
  */
 var tekenVeld = function () {
-  fill("black");
+  fill("white");
   rect(20, 20, width - 2 * 20, height - 2 * 20);
 };
 
@@ -72,8 +72,8 @@ var tekenVijand = function(x, y) {
  * @param {number} y y-coördinaat
  */
 var tekenKogel = function(x, y) {
-
-
+fill('black');
+ellipse(kogelX, kogelY, 10, 10);
 };
 
 
@@ -83,7 +83,7 @@ var tekenKogel = function(x, y) {
  * @param {number} y y-coördinaat
  */
 var tekenSpeler = function(x, y) {
-  fill("white");
+  fill("black");
   ellipse(spelerX, spelerY, 50, 50);
 };
 
@@ -100,7 +100,18 @@ var beweegVijand = function() {
  * Updatet globale variabelen met positie van kogel of bal
  */
 var beweegKogel = function() {
-
+if (keyIsDown(68) || keyIsDown(39)) {
+        kogelX+= 5;
+     } 
+if (keyIsDown(65) && spelerX > 50 || keyIsDown(37) && spelerX > 50) {
+        kogelX-= 5;
+     } 
+if (mouseIsPressed) {
+    kogelX+= 100;
+     } else {
+         kogelX= spelerX;
+         kogelY= spelerY;
+     }
 };
 
 
@@ -206,8 +217,8 @@ function draw() {
       beweegKogel();
       beweegSpeler();
       
-      score = score - 1; //iedere seconde wordt er 1 per seconde aan de score toegevoegd
-      
+      score = score - 0.01; //iedere seconde wordt er 1 per seconde aan de score toegevoegd
+      round(score)
 
     
       if (checkVijandGeraakt()) {
