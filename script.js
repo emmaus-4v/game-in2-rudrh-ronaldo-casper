@@ -33,6 +33,7 @@ var vijandX = 0;   // x-positie van vijand
 var vijandY = 0;   // y-positie van vijand
 
 var score = 2000; // aantal behaalde punten
+var tijd = 1;
 
 var springStatus = false;
 var valStatus = false;
