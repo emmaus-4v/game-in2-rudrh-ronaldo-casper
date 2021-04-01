@@ -215,14 +215,11 @@ function draw() {
       beweegKogel();
       beweegSpeler();
       
-<<<<<<< HEAD
    
       tijd = tijd + 1 / 50; //iedere seconde wordt er 1 per seconde aan de score toegevoegd
       Math.ceil(tijd); //afronden werkt nu niet 
       
       
-=======
->>>>>>> 0b1e628769813b0714356075ea18ef3713c2881b
       score = score - 1; //iedere seconde wordt er 1 per seconde aan de score toegevoegd
       
 
@@ -245,12 +242,9 @@ function draw() {
       tekenScore();
 
 
-<<<<<<< HEAD
       fill(255,0,0) //maakt de tekst rood
       textSize(50) //bepaalt de grootte van de tekst 
 
-=======
->>>>>>> 0b1e628769813b0714356075ea18ef3713c2881b
       if (checkGameOver()) {
         spelStatus = GAMEOVER;
       }
