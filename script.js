@@ -144,7 +144,6 @@ var beweegSpeler = function()  {
 };
 
 var tekenScore = function() {
-<<<<<<< HEAD
 fill(255,0,0) //maakt de tekst rood
 textSize(50) //bepaalt de grootte van de tekst 
 text("tijd:" + tijd, 25, 30, 25, 50); //zet de score op het beeld
@@ -153,12 +152,10 @@ return round(tijd); //afronden werkt nu niet
 text("score:" + score, 400, 30, 25, 50); //zet de score op het beeld
 score = score - 1/50; //iedere seconde wordt er 1 per seconde aan de score verwijdert
 Math.round(score); //afronden werkt nu niet 
-=======
       fill(255,0,0) //maakt de tekst rood
       textSize(50) //bepaalt de grootte van de tekst 
       text("Score:" + score, 25, 30, 25, 50); //zet de score op het beeld
 
->>>>>>> 0b1e628769813b0714356075ea18ef3713c2881b
 };
 
 /**
