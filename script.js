@@ -32,8 +32,7 @@ var kogelY = 0;    // y-positie van kogel
 var vijandX = 0;   // x-positie van vijand
 var vijandY = 0;   // y-positie van vijand
 
-var score = 0; // aantal behaalde punten
-var tijd = 1; //aantal secondes gespeeld
+var score = 2000; // aantal behaalde punten
 
 var springStatus = false;
 var valStatus = false;
@@ -144,11 +143,10 @@ var beweegSpeler = function()  {
 };
 
 var tekenScore = function() {
-fill(255,0,0) //maakt de tekst rood
-textSize(50) //bepaalt de grootte van de tekst 
-text("tijd:" + score, 25, 30, 25, 50); //zet de score op het beeld
-score = score / 50; //iedere seconde wordt er 1 per seconde aan de score toegevoegd
-round(score); //afronden werkt nu niet 
+      fill(255,0,0) //maakt de tekst rood
+      textSize(50) //bepaalt de grootte van de tekst 
+      text("Score:" + score, 25, 30, 25, 50); //zet de score op het beeld
+
 };
 
 /**
@@ -208,13 +206,8 @@ function draw() {
       beweegKogel();
       beweegSpeler();
       
-   
-      tijd = tijd + 1; //iedere seconde wordt er 1 per seconde aan de score toegevoegd
-      Math.ceil(tijd); //afronden werkt nu niet 
-      
-      
       score = score - 1; //iedere seconde wordt er 1 per seconde aan de score toegevoegd
-      round(score); //afronden werkt nu niet 
+      
 
     
       if (checkVijandGeraakt()) {
@@ -233,11 +226,6 @@ function draw() {
       tekenKogel(kogelX, kogelY);
       tekenSpeler(spelerX, spelerY);
       tekenScore();
-
-
-      fill(255,0,0) //maakt de tekst rood
-      textSize(50) //bepaalt de grootte van de tekst 
-      text("Tijd:" + tijd, 25, 30, 25, 50); //zet de score op het beeld
 
 
       if (checkGameOver()) {
