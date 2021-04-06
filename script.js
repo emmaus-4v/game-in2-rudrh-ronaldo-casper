@@ -155,6 +155,10 @@ var beweegSpeler = function()  {
 
 var tekenScore = function() {
     //score
+<<<<<<< HEAD
+=======
+    text("score:" + score, 400, 30, 25, 50); //zet de score op het beeld
+>>>>>>> f32610025a3af5f465a340c6269132b71d65c0cf
     fill(255,0,0) //maakt de tekst rood
     textSize(50) //bepaalt de grootte van de tekst
     text("score:" + score, 400, 30, 25, 50); //zet de score op het beeld
