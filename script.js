@@ -25,15 +25,14 @@ var spelStatus = SPELEN;
 var spelerX = 50; // x-positie van speler
 var spelerY = 680; // y-positie van speler
 
-var kogelX = 0;    // x-positie van kogel
-var kogelY = 0;    // y-positie van kogel
+var kogelX = 60;    // x-positie van kogel
+var kogelY = 680;    // y-positie van kogel
 
 
 var vijandX = 0;   // x-positie van vijand
 var vijandY = 0;   // y-positie van vijand
 
 var score = 2000; // aantal behaalde punten
-var tijd = 1; //tijd in seconde
 
 var springStatus = false;
 var valStatus = false;
@@ -51,7 +50,7 @@ var grondHoogte = 680;
  * Tekent het speelveld
  */
 var tekenVeld = function () {
-  fill("black");
+  fill("white");
   rect(20, 20, width - 2 * 20, height - 2 * 20);
 };
 
@@ -73,8 +72,8 @@ var tekenVijand = function(x, y) {
  * @param {number} y y-coördinaat
  */
 var tekenKogel = function(x, y) {
-
-
+fill('black');
+ellipse(kogelX, kogelY, 10, 10);
 };
 
 
@@ -84,7 +83,7 @@ var tekenKogel = function(x, y) {
  * @param {number} y y-coördinaat
  */
 var tekenSpeler = function(x, y) {
-  fill("white");
+  fill("black");
   ellipse(spelerX, spelerY, 50, 50);
 };
 
@@ -101,7 +100,18 @@ var beweegVijand = function() {
  * Updatet globale variabelen met positie van kogel of bal
  */
 var beweegKogel = function() {
-
+if (keyIsDown(68) || keyIsDown(39)) {
+        kogelX+= 5;
+     } 
+if (keyIsDown(65) && spelerX > 50 || keyIsDown(37) && spelerX > 50) {
+        kogelX-= 5;
+     } 
+if (mouseIsPressed) {
+    kogelX+= 100;
+     } else {
+         kogelX= spelerX;
+         kogelY= spelerY;
+     }
 };
 
 
@@ -144,18 +154,11 @@ var beweegSpeler = function()  {
 };
 
 var tekenScore = function() {
-    if(mouseIsPressed) {
-    //tijd
-    fill(255,0,0) //maakt de tekst rood
-    textSize(50) //bepaalt de grootte van de tekst 
-    text("tijd:" + tijd, 25, 30, 25, 50); //zet de score op het beeld
-
     //score
     text("score:" + score, 400, 30, 25, 50); //zet de score op het beeld
     Math.round(score); //afronden werkt nu niet 
     fill(255,0,0) //maakt de tekst rood
     textSize(50) //bepaalt de grootte van de tekst
-    }
 };
 
 /**
@@ -214,14 +217,10 @@ function draw() {
       beweegVijand();
       beweegKogel();
       beweegSpeler();
-      setup();
-   
-      tijd = tijd + 1 / 50; //iedere seconde wordt er 1 per seconde aan de score toegevoegd
-      Math.ceil(tijd); //afronden werkt nu niet 
+      setup();      
       
-      
-     score = score - 1/50; //iedere seconde wordt er 1 per seconde aan de score verwijdert;
-      
+      score = score - 0.01; //iedere seconde wordt er 1 score weggehaald
+      round(score)
 
     
       if (checkVijandGeraakt()) {
