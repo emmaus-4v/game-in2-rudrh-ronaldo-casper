@@ -29,8 +29,8 @@ var kogelX = 60;    // x-positie van kogel
 var kogelY = 680;    // y-positie van kogel
 
 
-var vijandX = 0;   // x-positie van vijand
-var vijandY = 0;   // y-positie van vijand
+var vijandX = 200;   // x-positie van vijand
+var vijandY = 200;   // y-positie van vijand
 
 var score = 2000; // aantal behaalde punten
 
@@ -61,8 +61,8 @@ var tekenVeld = function () {
  * @param {number} y y-coördinaat
  */
 var tekenVijand = function(x, y) {
-    
-
+    fill(255, 0, 0);
+    ellipse(vijandX, vijandY, 50, 50);
 };
 
 
@@ -83,7 +83,7 @@ ellipse(kogelX, kogelY, 10, 10);
  * @param {number} y y-coördinaat
  */
 var tekenSpeler = function(x, y) {
-  fill("black");
+  fill(0, 255, 0);
   ellipse(spelerX, spelerY, 50, 50);
 };
 
@@ -156,7 +156,6 @@ var beweegSpeler = function()  {
 var tekenScore = function() {
     //score
     text("score:" + score, 400, 30, 25, 50); //zet de score op het beeld
-    Math.round(score); //afronden werkt nu niet 
     fill(255,0,0) //maakt de tekst rood
     textSize(50) //bepaalt de grootte van de tekst
 };
@@ -219,7 +218,7 @@ function draw() {
       beweegSpeler();
       setup();      
       
-      score = score - 0.01; //iedere seconde wordt er 1 score weggehaald
+      score = score - 1 / 50; //iedere seconde wordt er 1 score weggehaald
       round(score)
 
     
