@@ -32,7 +32,7 @@ var kogelY = 680;    // y-positie van kogel
 var vijandX = 200;   // x-positie van vijand
 var vijandY = 200;   // y-positie van vijand
 
-var score = 2000; // aantal behaalde punten
+var score = 50; // aantal behaalde punten
 
 var springStatus = false;
 var valStatus = false;
@@ -44,7 +44,6 @@ var grondHoogte = 680;
 /* ********************************************* */
 /*      functies die je gebruikt in je game      */
 /* ********************************************* */
-
 
 /**
  * Tekent het speelveld
@@ -153,22 +152,23 @@ var beweegSpeler = function()  {
 
 };
 
+
 var tekenScore = function() {
     //score
-<<<<<<< HEAD
-=======
-    text("score:" + score, 400, 30, 25, 50); //zet de score op het beeld
->>>>>>> f32610025a3af5f465a340c6269132b71d65c0cf
+    score = score + 1 / 50; //iedere seconde wordt er 1 score weggehaald
+    var score = round(score)
     fill(255,0,0) //maakt de tekst rood
     textSize(50) //bepaalt de grootte van de tekst
-    text("score:" + score, 400, 30, 25, 50); //zet de score op het beeld
+    text("score:" + score, 30, 30, 25, 50); //zet de score op het beeld
 };
 
-/**
- * Zoekt uit of de vijand is geraakt
- * @returns {boolean} true als vijand is geraakt
+
+/** 
+  Zoekt uit of de vijand is geraakt
+  @returns {boolean} true als vijand is geraakt
  */
-var checkVijandGeraakt = function() {
+
+ var checkVijandGeraakt = function() {
 
   return false;
 };
@@ -222,8 +222,6 @@ function draw() {
       beweegSpeler();
       setup();      
       
-      score = score - 1 / 50; //iedere seconde wordt er 1 score weggehaald
-      round(score)
 
     
       if (checkVijandGeraakt()) {
@@ -242,10 +240,6 @@ function draw() {
       tekenKogel(kogelX, kogelY);
       tekenSpeler(spelerX, spelerY);
       tekenScore();
-
-
-      fill(255,0,0) //maakt de tekst rood
-      textSize(50) //bepaalt de grootte van de tekst 
 
       if (checkGameOver()) {
         spelStatus = GAMEOVER;
