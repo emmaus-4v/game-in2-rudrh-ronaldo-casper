@@ -32,7 +32,7 @@ var kogelY = 680;    // y-positie van kogel
 var vijandX = 200;   // x-positie van vijand
 var vijandY = 680;   // y-positie van vijand
 
-var score = 50; // aantal behaalde punten
+var score = 0; // aantal behaalde punten
 
 var springStatus = false;
 var valStatus = false;
@@ -152,19 +152,11 @@ var beweegSpeler = function()  {
 
 
 var tekenScore = function() {
-<<<<<<< HEAD
-    //score
-    score = score + 1 / 50; //iedere seconde wordt er 1 score weggehaald
-    var score = round(score)
-    fill(255,0,0) //maakt de tekst rood
-    textSize(50) //bepaalt de grootte van de tekst
-    text("score:" + score, 30, 30, 25, 50); //zet de score op het beeld
-=======
     
     fill(255,0,0) //maakt de tekst rood
     textSize(50) //bepaalt de grootte van de tekst
     text("Score:" + score, 30, 30, 25, 50); //zet de score op het beeld
-    score = score - 0.01; //iedere seconde wordt er 1 score weggehaald
+    score = score + 0.01; //iedere seconde wordt er 1 score weggehaald
 
     if (checkVijandGeraakt()) {
         // punten erbij
@@ -176,7 +168,6 @@ var tekenScore = function() {
         // leven eraf of gezondheid verlagen
         // eventueel: nieuwe speler maken
       }
->>>>>>> 85b02e34bcf6030b9ecdb9647bd58b108cc6e931
 };
 
 
@@ -184,16 +175,11 @@ var tekenScore = function() {
   Zoekt uit of de vijand is geraakt
   @returns {boolean} true als vijand is geraakt
  */
-<<<<<<< HEAD
-
- var checkVijandGeraakt = function() {
-=======
 var checkVijandGeraakt = function() {  
   if (kogelX === vijandX && kogelY === vijandY) {
      vijandX = 0;
      vijandY = 0;
 }
->>>>>>> 85b02e34bcf6030b9ecdb9647bd58b108cc6e931
 
   return false;
 
@@ -246,36 +232,15 @@ function draw() {
       beweegVijand();
       beweegKogel();
       beweegSpeler();
-<<<<<<< HEAD
-      setup();      
-      
-
-    
-      if (checkVijandGeraakt()) {
-        // punten erbij
-        // nieuwe vijand maken
-        score = score + 5; // wanneer een vijand geraakt is wordt er 100 aan de score toegevoegd
-      }
-      
-      if (checkSpelerGeraakt()) {
-        // leven eraf of gezondheid verlagen
-        // eventueel: nieuwe speler maken
-      }
-
-=======
       setup();  
  
->>>>>>> 85b02e34bcf6030b9ecdb9647bd58b108cc6e931
       tekenVeld();
       tekenVijand(vijandX, vijandY);
       tekenKogel(kogelX, kogelY);
       tekenSpeler(spelerX, spelerY);
       tekenScore();
 
-<<<<<<< HEAD
-=======
  
->>>>>>> 85b02e34bcf6030b9ecdb9647bd58b108cc6e931
       if (checkGameOver()) {
         spelStatus = GAMEOVER;
       }
