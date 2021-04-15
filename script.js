@@ -29,7 +29,7 @@ var kogelX = 60;    // x-positie van kogel
 var kogelY = 680;    // y-positie van kogel
 
 
-var vijandX = 200;   // x-positie van vijand
+var vijandX;   // x-positie van vijand
 var vijandY = 680;   // y-positie van vijand
 
 var score = 10000; // aantal behaalde punten
@@ -95,6 +95,10 @@ var tekenSpeler = function(x, y) {
  */
 var beweegVijand = function() {
     
+    for(vijandX = 0, vijandX <= 800, vijandX += 10){
+        
+
+    }
 };
 
 
@@ -160,7 +164,7 @@ var checkVijandGeraakt = function() {
   if (kogelX === vijandX && kogelY === vijandY) {
      vijandX = -50;
      vijandY = -50;
-     score = score + 5; // wanneer een vijand geraakt is wordt er 100 aan de score toegevoegd
+     score = score + 100; // wanneer een vijand geraakt is wordt er 100 aan de score toegevoegd
      kogelX = spelerX;
      kogelY = spelerY;
 } 
@@ -172,10 +176,10 @@ return false;
 var beweegKogel = function() {
 
 if (mouseIsPressed && checkVijandGeraakt) {
-    kogelX+= 50;
+    kogelX += 50;
      } else {
-         kogelX= spelerX;
-         kogelY= spelerY;
+         kogelX = spelerX;
+         kogelY = spelerY;
      }
 };
 
