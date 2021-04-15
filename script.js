@@ -32,7 +32,7 @@ var kogelY = 680;    // y-positie van kogel
 var vijandX;   // x-positie van vijand
 var vijandY = 680;   // y-positie van vijand
 
-var score = 10000; // aantal behaalde punten
+var score = 2000; // aantal behaalde punten
 
 var springStatus = false;
 var valStatus = false;
@@ -147,12 +147,11 @@ var beweegSpeler = function()  {
 
 
 var tekenScore = function() {
-    
+    var tekenScore = round(score);
     fill(255,0,0) //maakt de tekst rood
     textSize(50) //bepaalt de grootte van de tekst
-    text("Score:" + score, 30, 30, 25, 50); //zet de score op het beeld
-    score = score - 1; //iedere seconde wordt er 1 score weggehaald
-
+    text("Score:" + tekenScore, 30, 30, 25, 50); //zet de score op het beeld
+    score = score - (1/50); //iedere seconde wordt er 1 score weggehaald
 };
 
 
