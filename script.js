@@ -95,7 +95,7 @@ var tekenSpeler = function(x, y) {
  */
 var beweegVijand = function() {
     
-    for(vijandX = 0, vijandX <= 800, vijandX += 10){
+    for(vijandX = 0, vijandX <= 800, vijandX += 10);{
         
 
     }
