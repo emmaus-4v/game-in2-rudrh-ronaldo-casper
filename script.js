@@ -96,9 +96,9 @@ var tekenSpeler = function(x, y) {
 var beweegVijand = function() {
 
      if (spelerX > vijandX) {
-      vijandX += 1;
+      vijandX += 2;
     } else {
-        vijandX -= 1;
+        vijandX -= 2;
     }
 };
 
@@ -174,9 +174,9 @@ return false;
 var beweegKogel = function() {
 
 if (mouseIsPressed) {
-    kogelX += 50;
+    kogelX += 30;
      } else {
-         kogelX = spelerX;
+         kogelX = spelerX + 25;
          kogelY = spelerY;
      }
 };
