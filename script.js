@@ -29,7 +29,7 @@ var kogelX = 60;    // x-positie van kogel
 var kogelY = 680;    // y-positie van kogel
 
 
-var vijandX;   // x-positie van vijand
+var vijandX = 200;   // x-positie van vijand
 var vijandY = 680;   // y-positie van vijand
 
 var score = 2000; // aantal behaalde punten
@@ -95,10 +95,7 @@ var tekenSpeler = function(x, y) {
  */
 var beweegVijand = function() {
     
-    for(vijandX = 0, vijandX <= 800, vijandX += 10);{
-        
-
-    }
+    
 };
 
 
@@ -161,11 +158,9 @@ var tekenScore = function() {
  */
 var checkVijandGeraakt = function() {  
   if (kogelX === vijandX && kogelY === vijandY) {
-     vijandX = -50;
-     vijandY = -50;
-     score = score + 100; // wanneer een vijand geraakt is wordt er 100 aan de score toegevoegd
-     kogelX = spelerX;
-     kogelY = spelerY;
+     score = score + 20; // wanneer een vijand geraakt is wordt er 20 aan de score toegevoegd
+     vijandX = 0;
+     vijandY = 0;
 } 
     
 return false;
@@ -174,7 +169,7 @@ return false;
 
 var beweegKogel = function() {
 
-if (mouseIsPressed && checkVijandGeraakt) {
+if (mouseIsPressed) {
     kogelX += 50;
      } else {
          kogelX = spelerX;
@@ -235,17 +230,7 @@ function draw() {
       tekenKogel(kogelX, kogelY);
       tekenSpeler(spelerX, spelerY);
       tekenScore();
-
-      if (checkVijandGeraakt()) {
-        // punten erbij
-        // nieuwe vijand maken
-        score = score + 5; // wanneer een vijand geraakt is wordt er 100 aan de score toegevoegd
-      }
-        if (checkSpelerGeraakt()) {
-        // leven eraf of gezondheid verlagen
-        // eventueel: nieuwe speler maken
-      }
-
+      checkVijandGeraakt();
  
       if (checkGameOver()) {
         spelStatus = GAMEOVER;
