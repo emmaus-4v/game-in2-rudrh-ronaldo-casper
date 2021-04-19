@@ -29,8 +29,9 @@ var kogelX = 60;    // x-positie van kogel
 var kogelY = 680;    // y-positie van kogel
 
 
-var vijandX;   // x-positie van vijand
+var vijandX = 50;   // x-positie van vijand
 var vijandY = 680;   // y-positie van vijand
+var alGeweest = false; // checken rechts
 
 var score = 2000; // aantal behaalde punten
 
@@ -95,10 +96,16 @@ var tekenSpeler = function(x, y) {
  */
 var beweegVijand = function() {
     
-    for(vijandX = 0, vijandX <= 800, vijandX += 10);{
-        
-
+    if(vijandX < 800 && alGeweest != true){
+        vijandX += 10
+        alGeweest = true;
+    } else {
+        vijandX -= 10;
+        if (vijandX === 0){
+            alGeweest = false;
+        }
     }
+
 };
 
 
