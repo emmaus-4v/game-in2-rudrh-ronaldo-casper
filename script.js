@@ -96,10 +96,11 @@ var tekenSpeler = function(x, y) {
 var beweegVijand = function() {
 
      if (spelerX > vijandX) {
-      vijandX += 2;
+      vijandX += 2.5;
     } else {
-        vijandX -= 2;
+        vijandX -= 2.5;
     }
+    
 };
 
 
@@ -161,7 +162,7 @@ var tekenScore = function() {
   @returns {boolean} true als vijand is geraakt
  */
 var checkVijandGeraakt = function() {  
-  if (kogelX === vijandX && kogelY === vijandY) {
+  if (kogelX >= vijandX - 25 && kogelX <= vijandX + 25 && kogelY >= vijandY - 25 && kogelY <= vijandY + 25 && mouseIsPressed) {
      score = score + 20; // wanneer een vijand geraakt is wordt er 20 aan de score toegevoegd
      vijandX = 0;
      vijandY = 0;
@@ -175,7 +176,7 @@ var beweegKogel = function() {
 
 if (mouseIsPressed) {
     kogelX += 30;
-     } else {
+    } else {
          kogelX = spelerX + 25;
          kogelY = spelerY;
      }
