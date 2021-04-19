@@ -187,8 +187,13 @@ if (mouseIsPressed) {
  * @returns {boolean} true als speler is geraakt
  */
 var checkSpelerGeraakt = function() {
-    
-  return false;
+    if(vijandX && vijandY === spelerX + 25 && spelerY + 25){
+        return true;
+    } else if(vijandX && vijandY === spelerX - 25 && spelerY - 25){
+        return true;
+    } else {
+        return false;
+    }
 };
 
 
