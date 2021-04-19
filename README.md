@@ -10,10 +10,10 @@ Basis: uitleg, spelen, afgaan en punten
 - [x] maak index.html, style.css en script.js met canvas 
 - [x] beweeg speler 
 - [x] punten op scherm zetten 
-- [ ] punten kunnen scoren 
+- [x] punten kunnen scoren 
 - [ ] uitlegscherm 
 - [ ] beweeg vijand
-- [ ] beweeg kogel
+- [x] beweeg kogel
 - [ ] teken speler
 - [ ] victory of defeat scherm
 - [ ] menuscherm
