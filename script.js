@@ -245,9 +245,9 @@ function draw() {
       if (checkGameOver()) {
         spelStatus = GAMEOVER;
         fill(204, 153, 0);
-        rect(100,100,50,20);
+        rect(100,100,50,20); // maakt een rechthoek
         fill(255,255,255);
-        text('Game Over',125,125,140,140);
+        text('Game Over',125,125,140,140); // Zet de tekst game over op de rechthoek
       }
       break;
   }
