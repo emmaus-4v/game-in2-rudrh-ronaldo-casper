@@ -29,9 +29,8 @@ var kogelX = 60;    // x-positie van kogel
 var kogelY = 680;    // y-positie van kogel
 
 
-var vijandX = 50;   // x-positie van vijand
-var vijandY = 500;   // y-positie van vijand
-var alGeweest = false; // checken rechts
+var vijandX = 250;   // x-positie van vijand
+var vijandY = 680;   // y-positie van vijand
 
 var score = 2000; // aantal behaalde punten
 
@@ -95,19 +94,12 @@ var tekenSpeler = function(x, y) {
  * Updatet globale variabelen met positie van vijand of tegenspeler
  */
 var beweegVijand = function() {
-    
-    if(vijandX < 800 && alGeweest === false){
-        vijandX += 10
-        if(vijandX === 800){
-        return alGeweest = true;
-        }
-    } else if(vijandX === 800 && alGeweest === true){
-        vijandX -= 10;
-        if (vijandX === 200){
-        return alGeweest = false;
-        }
-    }
 
+     if (spelerX > vijandX) {
+      vijandX += 1;
+    } else {
+        vijandX -= 1;
+    }
 };
 
 
@@ -170,11 +162,9 @@ var tekenScore = function() {
  */
 var checkVijandGeraakt = function() {  
   if (kogelX === vijandX && kogelY === vijandY) {
-     vijandX = -50;
-     vijandY = -50;
-     score = score + 100; // wanneer een vijand geraakt is wordt er 100 aan de score toegevoegd
-     kogelX = spelerX;
-     kogelY = spelerY;
+     score = score + 20; // wanneer een vijand geraakt is wordt er 20 aan de score toegevoegd
+     vijandX = 0;
+     vijandY = 0;
 } 
     
 return false;
@@ -183,7 +173,7 @@ return false;
 
 var beweegKogel = function() {
 
-if (mouseIsPressed && checkVijandGeraakt) {
+if (mouseIsPressed) {
     kogelX += 50;
      } else {
          kogelX = spelerX;
@@ -197,8 +187,13 @@ if (mouseIsPressed && checkVijandGeraakt) {
  * @returns {boolean} true als speler is geraakt
  */
 var checkSpelerGeraakt = function() {
-    
-  return false;
+    if(vijandX && vijandY === spelerX + 25 && spelerY + 25){
+        return true;
+    } else if(vijandX && vijandY === spelerX - 25 && spelerY - 25){
+        return true;
+    } else {
+        return false;
+    }
 };
 
 
@@ -244,20 +239,15 @@ function draw() {
       tekenKogel(kogelX, kogelY);
       tekenSpeler(spelerX, spelerY);
       tekenScore();
-
-      if (checkVijandGeraakt()) {
-        // punten erbij
-        // nieuwe vijand maken
-        score = score + 5; // wanneer een vijand geraakt is wordt er 100 aan de score toegevoegd
-      }
-        if (checkSpelerGeraakt()) {
-        // leven eraf of gezondheid verlagen
-        // eventueel: nieuwe speler maken
-      }
+      checkVijandGeraakt();
 
  
       if (checkGameOver()) {
         spelStatus = GAMEOVER;
+        fill(204, 153, 0);
+        rect(100,100,50,20);
+        fill(255,255,255);
+        text('Game Over',125,125,140,140);
       }
       break;
   }
