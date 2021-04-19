@@ -31,6 +31,7 @@ var kogelY = 680;    // y-positie van kogel
 
 var vijandX = 200;   // x-positie van vijand
 var vijandY = 680;   // y-positie van vijand
+var alGeweest = false; // checken rechts
 
 var score = 2000; // aantal behaalde punten
 
