@@ -32,7 +32,7 @@ var kogelY = 680;    // y-positie van kogel
 var vijandX = 250;   // x-positie van vijand
 var vijandY = 680;   // y-positie van vijand
 
-var score = 2000; // aantal behaalde punten
+var score = 5; // aantal behaalde punten
 
 var springStatus = false;
 var valStatus = false;
@@ -205,8 +205,12 @@ var checkSpelerGeraakt = function() {
  * @returns {boolean} true als het spel is afgelopen
  */
 var checkGameOver = function() {
-    
-  return false;
+  if(score <= 0) {
+      return true;
+  }  
+  else {
+      return false; 
+}
 };
 
 
