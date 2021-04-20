@@ -188,13 +188,15 @@ if (mouseIsPressed) {
  * @returns {boolean} true als speler is geraakt
  */
 var checkSpelerGeraakt = function() {
-    if(vijandX && vijandY === spelerX + 25 && spelerY + 25){
-        return true;
-    } else if(vijandX && vijandY === spelerX - 25 && spelerY - 25){
-        return true;
-    } else {
+        
+        if(vijandX === spelerX + 25){
+            score -= 500;
+        } else if(vijandX === spelerX - 25){
+            score -= 500;
+        } else {
         return false;
     }
+
 };
 
 
@@ -241,7 +243,7 @@ function draw() {
       tekenSpeler(spelerX, spelerY);
       tekenScore();
       checkVijandGeraakt();
-
+      checkSpelerGeraakt();
  
       if (checkGameOver()) {
         spelStatus = GAMEOVER;
