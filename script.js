@@ -32,13 +32,15 @@ var kogelY = 680;    // y-positie van kogel
 var vijandX = 250;   // x-positie van vijand
 var vijandY = 680;   // y-positie van vijand
 
-var score = 5; // aantal behaalde punten
+var score = 2000; // aantal behaalde punten
 
 var springStatus = false;
 var valStatus = false;
 var sprongHoogte = 680;
 var sprongSnelheid = 1;
 var grondHoogte = 680;
+
+
 
 
 /* ********************************************* */
@@ -51,6 +53,7 @@ var grondHoogte = 680;
 var tekenVeld = function () {
   fill("white");
   rect(20, 20, width - 2 * 20, height - 2 * 20);
+  
 };
 
 
@@ -60,9 +63,9 @@ var tekenVeld = function () {
  * @param {number} y y-coördinaat
  */
 var tekenVijand = function(x, y) {
-    fill(255, 0, 0);
+    fill("red");
     ellipse(vijandX, vijandY, 50, 50);
-  
+    
 };
 
 
@@ -95,10 +98,10 @@ var tekenSpeler = function(x, y) {
 var beweegVijand = function() {
 
      if (spelerX > vijandX) {
-      vijandX += 2.5;
-    } else {
+        vijandX += 2.5;
+    } else if ( spelerX < vijandX) {
         vijandX -= 2.5;
-    }
+    } 
     
 };
 
@@ -165,6 +168,7 @@ var checkVijandGeraakt = function() {
      score = score + 20; // wanneer een vijand geraakt is wordt er 20 aan de score toegevoegd
      vijandX = 0;
      vijandY = 0;
+     
 } 
     
 return false;
@@ -173,8 +177,10 @@ return false;
 
 var beweegKogel = function() {
 
-if (mouseIsPressed) {
+if (mouseIsPressed && mouseX > spelerX) {
     kogelX += 30;
+    } else if (mouseIsPressed && mouseX < spelerX) {
+        kogelX -= 30;
     } else {
          kogelX = spelerX + 25;
          kogelY = spelerY;
@@ -188,9 +194,9 @@ if (mouseIsPressed) {
  */
 var checkSpelerGeraakt = function() {
         
-        if(vijandX === spelerX + 25){
+        if(vijandX === spelerX + 25 && vijandY === spelerY){
             score -= 500;
-        } else if(vijandX === spelerX - 25){
+        } else if(vijandX === spelerX - 25 && vijandY === spelerY){
             score -= 500;
         } else {
         return false;
