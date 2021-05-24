@@ -181,10 +181,12 @@ if (mouseIsPressed && mouseX > spelerX) {
     kogelX += 30;
     } else if (mouseIsPressed && mouseX < spelerX) {
         kogelX -= 30;
-    } else {
-         kogelX = spelerX + 25;
-         kogelY = spelerY;
-     }
+    } 
+    if (mouseIsPressed && mouseY > spelerY) {
+        kogelY += 5;
+    } else if (mouseIsPressed && mouseY < spelerY) {
+        kogelY -= 5;
+    }
 };
 
 /**
