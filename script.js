@@ -247,7 +247,6 @@ function draw() {
       beweegKogel();
       beweegSpeler();
       setup();  
- 
       tekenVeld();
       tekenVijand(vijandX, vijandY);
       tekenKogel(kogelX, kogelY);
@@ -255,9 +254,7 @@ function draw() {
       tekenScore();
       checkVijandGeraakt();
       checkSpelerGeraakt();
-      
       if (checkGameOver()) {
-        spelStatus = GAMEOVER;
         fill(207, 53, 23);
         rect(100,100,1100,550); // maakt een rechthoek
         fill(23, 32, 207)
@@ -266,10 +263,15 @@ function draw() {
         textSize(100)
         text('Game Over',400,150,600,450); // Zet de tekst game over op de rechthoek
         textSize(30)
-        text('Probeer Opnieuw',275,480,250,525)
+        text('Probeer Opnieuw',275,480,250,525);
         if(mouseX > 200 && mouseX < 600 && mouseY > 450 && mouseY < 650 && mouseIsPressed) {
           spelStatus = SPELEN;
         }
+        else {
+         spelStatus = GAMEOVER;
+        }
+    
+        text('x-as ' + mouseX,500,500,800,800);
       }
       break;
   }
