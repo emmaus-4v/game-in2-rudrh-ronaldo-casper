@@ -264,15 +264,14 @@ function draw() {
         text('Game Over',400,150,600,450); // Zet de tekst game over op de rechthoek
         textSize(30)
         text('Probeer Opnieuw',275,480,250,525);
-        if(mouseX > 200 && mouseX < 600 && mouseY > 450 && mouseY < 650 && mouseIsPressed) {
-          spelStatus = SPELEN;
-        }
-        else {
-         spelStatus = GAMEOVER;
-        }
-    
+        spelStatus = GAMEOVER;
         text('x-as ' + mouseX,500,500,800,800);
       }
       break;
+      case GAMEOVER: 
+      if(mouseX > 200 && mouseX < 600 && mouseY > 450 && mouseY < 650 && mouseIsPressed){
+        spelStatus = SPELEN
+        score = 1000;
+     }
   }
 }
