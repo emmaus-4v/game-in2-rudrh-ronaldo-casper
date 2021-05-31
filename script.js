@@ -32,7 +32,7 @@ var kogelY = 680;    // y-positie van kogel
 var vijandX = 250;   // x-positie van vijand
 var vijandY = 680;   // y-positie van vijand
 
-var score = 2000; // aantal behaalde punten
+var score = 100; // aantal behaalde punten
 
 var springStatus = false;
 var valStatus = false;
@@ -258,10 +258,11 @@ function draw() {
  
       if (checkGameOver()) {
         spelStatus = GAMEOVER;
-        fill(204, 153, 0);
-        rect(100,100,50,20); // maakt een rechthoek
+        fill(207, 53, 23);
+        rect(100,100,1100,550); // maakt een rechthoek
         fill(255,255,255);
-        text('Game Over',125,125,140,140); // Zet de tekst game over op de rechthoek
+        textSize(100)
+        text('Game Over',400,150,600,450); // Zet de tekst game over op de rechthoek
       }
       break;
   }
