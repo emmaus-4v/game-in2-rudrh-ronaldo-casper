@@ -42,7 +42,6 @@ var grondHoogte = 680;
 
 
 
-
 /* ********************************************* */
 /*      functies die je gebruikt in je game      */
 /* ********************************************* */
@@ -220,6 +219,31 @@ var checkGameOver = function() {
 }
 };
 
+var gameReset = function() {
+    spelerX = 50; // x-positie van speler
+    spelerY = 680; // y-positie van speler
+    kogelX = 60;    // x-positie van kogel
+    kogelY = 680;    // y-positie van kogel
+    vijandX = 250;   // x-positie van vijand
+    vijandY = 680;   // y-positie van vijand
+    score = 100; // aantal behaalde punten
+    springStatus = false;
+    valStatus = false;
+    sprongHoogte = 680;
+    sprongSnelheid = 1;
+    grondHoogte = 680;
+    beweegVijand();
+    beweegKogel();
+    beweegSpeler();
+    setup();  
+    tekenVeld();
+    tekenVijand(vijandX, vijandY);
+    tekenKogel(kogelX, kogelY);
+    tekenSpeler(spelerX, spelerY);
+    tekenScore();
+    checkVijandGeraakt();
+    checkSpelerGeraakt();
+}
 
 /**
  * setup
@@ -265,13 +289,13 @@ function draw() {
         textSize(30)
         text('Probeer Opnieuw',275,480,250,525);
         spelStatus = GAMEOVER;
-        text('x-as ' + mouseX,500,500,800,800);
       }
       break;
       case GAMEOVER: 
       if(mouseX > 200 && mouseX < 600 && mouseY > 450 && mouseY < 650 && mouseIsPressed){
         spelStatus = SPELEN
-        score = 1000;
+        gameReset();
      }
+     break;
   }
 }
