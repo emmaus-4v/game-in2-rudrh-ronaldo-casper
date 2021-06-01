@@ -20,6 +20,7 @@
 const UITLEG = 0;
 const SPELEN = 1;
 const GAMEOVER = 2;
+const MAINMENU = 3;
 var spelStatus = SPELEN;
 
 var spelerX = 50; // x-positie van speler
@@ -230,17 +231,6 @@ var gameReset = function() {
     sprongHoogte = 680;
     sprongSnelheid = 1;
     grondHoogte = 680;
-    beweegVijand();
-    beweegKogel();
-    beweegSpeler();
-    setup();  
-    tekenVeld();
-    tekenVijand(vijandX, vijandY);
-    tekenKogel(kogelX, kogelY);
-    tekenSpeler(spelerX, spelerY);
-    tekenScore();
-    checkVijandGeraakt();
-    checkSpelerGeraakt();
 }
 
 /**
@@ -277,23 +267,36 @@ function draw() {
       checkVijandGeraakt();
       checkSpelerGeraakt();
       if (checkGameOver()) {
+        spelStatus = GAMEOVER;
+      }
+      break;
+
+      case GAMEOVER: 
         fill(207, 53, 23);
         rect(100,100,1100,550); // maakt een rechthoek
         fill(23, 32, 207)
         rect(200,450,400,100) //maakt een knop om opnieuw te spelen
+        rect(700,450,400,100)
         fill(255,255,255);
         textSize(100)
-        text('Game Over',400,150,600,450); // Zet de tekst game over op de rechthoek
+        text('Game Over',400,150,600,450); // Zet de tekst "game over" op de rechthoek
         textSize(30)
         text('Probeer Opnieuw',275,480,250,525);
-        spelStatus = GAMEOVER;
-      }
-      break;
-      case GAMEOVER: 
-      if(mouseX > 200 && mouseX < 600 && mouseY > 450 && mouseY < 650 && mouseIsPressed){
+        text('Terug naar hoofdmenu',750,480,850,600);
+        if(mouseX > 200 && mouseX < 600 && mouseY > 450 && mouseY < 650 && mouseIsPressed){
         spelStatus = SPELEN
         gameReset();
-     }
+        }
+        if(mouseX > 700 && mouseX < 1100 && mouseY > 450 && mouseY < 650 && mouseIsPressed){
+        spelStatus = MAINMENU
+        }
+     break;
+
+     case MAINMENU:
+         background(255,255,255);
+         fill(0,0,0);
+         textSize(100)
+         text('[Game naam hier]',250,100,1000,300);
      break;
   }
 }
