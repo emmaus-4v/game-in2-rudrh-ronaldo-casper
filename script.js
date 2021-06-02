@@ -21,7 +21,7 @@ const UITLEG = 0;
 const SPELEN = 1;
 const GAMEOVER = 2;
 const MAINMENU = 3;
-var spelStatus = SPELEN;
+var spelStatus = MAINMENU;
 
 var spelerX = 50; // x-positie van speler
 var spelerY = 680; // y-positie van speler
@@ -289,14 +289,23 @@ function draw() {
         }
         if(mouseX > 700 && mouseX < 1100 && mouseY > 450 && mouseY < 650 && mouseIsPressed){
         spelStatus = MAINMENU
+        gameReset();
         }
      break;
 
      case MAINMENU:
-         background(255,255,255);
+         background(155,255,155);
          fill(0,0,0);
          textSize(100)
-         text('[Game naam hier]',250,100,1000,300);
+         text('[Game naam hier]',250,75,1000,300);
+         fill(23, 32, 207)
+         rect(375,400,500,100)
+         fill(255,255,255)
+         textSize(40)
+         text('Spelen',550,425,500,450)
+         if(mouseX > 375 && mouseX < 875 && mouseY > 400 && mouseY < 500 && mouseIsPressed){
+        spelStatus = SPELEN
+        }
      break;
   }
 }
