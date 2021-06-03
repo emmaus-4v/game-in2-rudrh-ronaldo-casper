@@ -18,10 +18,11 @@
 /* ********************************************* */
 
 const UITLEG = 0;
-const SPELEN = 1;
+const LEVEL1 = 1;
 const GAMEOVER = 2;
 const MAINMENU = 3;
 const WIN = 4;
+const LEVEL2= 5;
 var spelStatus = MAINMENU;
 
 var spelerX = 50; // x-positie van speler
@@ -268,6 +269,22 @@ var gameReset = function() {
     grondHoogte = 680;
 }
 
+var gameSetup = function() {
+    beweegVijand();
+    beweegKogel();
+    beweegSpeler();
+    setup();  
+    tekenVeld();
+    tekenPlatform(platformX, platformY);
+    tekenVijand(vijandX, vijandY);
+    tekenKogel(kogelX, kogelY);
+    tekenSpeler(spelerX, spelerY);
+    tekenScore();
+    checkVijandGeraakt();
+    checkSpelerGeraakt();
+    checkPlatformGeraakt();
+}
+
 /**
  * setup
  * de code in deze functie wordt één keer uitgevoerd door
@@ -289,20 +306,8 @@ function setup() {
  */
 function draw() {
   switch (spelStatus) {
-    case SPELEN:
-      beweegVijand();
-      beweegKogel();
-      beweegSpeler();
-      setup();  
-      tekenVeld();
-      tekenPlatform(platformX, platformY);
-      tekenVijand(vijandX, vijandY);
-      tekenKogel(kogelX, kogelY);
-      tekenSpeler(spelerX, spelerY);
-      tekenScore();
-      checkVijandGeraakt();
-      checkSpelerGeraakt();
-      checkPlatformGeraakt();
+    case LEVEL1:
+      gameSetup()
       if (checkGameOver()) {
         spelStatus = GAMEOVER;
       }
@@ -324,7 +329,7 @@ function draw() {
         text('Probeer Opnieuw',275,480,250,525);
         text('Terug naar hoofdmenu',750,480,850,600);
         if(mouseX > 200 && mouseX < 600 && mouseY > 450 && mouseY < 650 && mouseIsPressed){
-        spelStatus = SPELEN
+        spelStatus = LEVEL1
         gameReset();
         }
         if(mouseX > 700 && mouseX < 1100 && mouseY > 450 && mouseY < 650 && mouseIsPressed){
@@ -344,7 +349,7 @@ function draw() {
          textSize(40)
          text('Spelen',550,425,500,450)
          if(mouseX > 375 && mouseX < 875 && mouseY > 400 && mouseY < 500 && mouseIsPressed){
-             spelStatus = SPELEN
+             spelStatus = LEVEL1
          }
      break;
 
@@ -361,16 +366,20 @@ function draw() {
         text('Volgend level',300,480,250,525);
         text('Terug naar hoofdmenu',750,480,850,600);
         if(mouseX > 200 && mouseX < 600 && mouseY > 450 && mouseY < 650 && mouseIsPressed){
-        spelStatus = SPELEN
+        spelStatus = LEVEL1
         gameReset();
         }
         if(mouseX > 700 && mouseX < 1100 && mouseY > 450 && mouseY < 650 && mouseIsPressed){
         spelStatus = MAINMENU
         gameReset();
-         
-     
+        }
+        break;
 
-  }
+        case LEVEL2: 
+         gameSetup()
+        break;
+    
+
 
   }
 }
