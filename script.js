@@ -21,6 +21,7 @@ const UITLEG = 0;
 const SPELEN = 1;
 const GAMEOVER = 2;
 const MAINMENU = 3;
+const WIN = 4;
 var spelStatus = MAINMENU;
 
 var spelerX = 50; // x-positie van speler
@@ -231,7 +232,6 @@ var checkSpelerGeraakt = function() {
 
 };
 
-
 /**
  * Zoekt uit of het spel is afgelopen
  * @returns {boolean} true als het spel is afgelopen
@@ -242,7 +242,16 @@ var checkGameOver = function() {
   }  
   else {
       return false; 
+  }
+};
+
+var checkWin = function() {
+if(spelerX > 1280) {
+ return true;
 }
+else {
+    return false;
+ }
 };
 
 var gameReset = function() {
@@ -304,6 +313,9 @@ function draw() {
       if (checkGameOver()) {
         spelStatus = GAMEOVER;
       }
+      if (checkWin()) {
+          spelStatus = WIN
+      }
       break;
 
       case GAMEOVER: 
@@ -339,8 +351,33 @@ function draw() {
          textSize(40)
          text('Spelen',550,425,500,450)
          if(mouseX > 375 && mouseX < 875 && mouseY > 400 && mouseY < 500 && mouseIsPressed){
-        spelStatus = SPELEN
-        }
+             spelStatus = SPELEN
+         }
      break;
+
+     case WIN:
+        fill(59, 156, 17);
+        rect(100,100,1100,550); // maakt een rechthoek
+        fill(23, 32, 207)
+        rect(200,450,400,100) //maakt een knop om opnieuw te spelen
+        rect(700,450,400,100)
+        fill(255,255,255);
+        textSize(100)
+        text('Level Voltooid!',325,150,700,450); // Zet de tekst "level voltooid" op de rechthoek
+        textSize(30)
+        text('Volgend level',300,480,250,525);
+        text('Terug naar hoofdmenu',750,480,850,600);
+        if(mouseX > 200 && mouseX < 600 && mouseY > 450 && mouseY < 650 && mouseIsPressed){
+        spelStatus = SPELEN
+        gameReset();
+        }
+        if(mouseX > 700 && mouseX < 1100 && mouseY > 450 && mouseY < 650 && mouseIsPressed){
+        spelStatus = MAINMENU
+        gameReset();
+         
+     
+
+  }
+
   }
 }
