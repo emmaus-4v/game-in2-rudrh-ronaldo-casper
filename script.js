@@ -47,6 +47,7 @@ var sprongHoogte = 680;
 var sprongSnelheid = 1;
 var grondHoogte = 680;
 
+var spelerFoto = 0;
 
 
 /* ********************************************* */
@@ -97,7 +98,7 @@ var tekenKogel = function(x, y) {
  */
 var tekenSpeler = function(x, y) {
     fill(0, 255, 0);
-    ellipse(spelerX, spelerY, 50, 50);
+    image( spelerFoto, x, y, 50, 50);
 };
 
 
@@ -206,9 +207,9 @@ var checkPlatformGeraakt = function() {
 var beweegKogel = function() {
 
 if (mouseIsPressed && mouseX > spelerX) {
-    kogelX += 30;
+    kogelX += 10;
     } else if (mouseIsPressed && mouseX < spelerX) {
-        kogelX -= 30;
+        kogelX -= 10;
     } else {
         kogelX = spelerX;
         kogelY = spelerY;
@@ -297,6 +298,7 @@ function setup() {
   // Kleur de achtergrond blauw, zodat je het kunt zien
   background('blue');
 }
+
 
 
 /**
