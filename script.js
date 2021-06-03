@@ -45,6 +45,7 @@ var sprongHoogte = 680;
 var sprongSnelheid = 1;
 var grondHoogte = 680;
 
+var spelerFoto = 0;
 
 
 /* ********************************************* */
@@ -95,7 +96,7 @@ var tekenKogel = function(x, y) {
  */
 var tekenSpeler = function(x, y) {
     fill(0, 255, 0);
-    ellipse(spelerX, spelerY, 50, 50);
+    image( spelerFoto, x, y, 50, 50);
 };
 
 
@@ -204,9 +205,9 @@ var checkPlatformGeraakt = function() {
 var beweegKogel = function() {
 
 if (mouseIsPressed && mouseX > spelerX) {
-    kogelX += 30;
+    kogelX += 10;
     } else if (mouseIsPressed && mouseX < spelerX) {
-        kogelX -= 30;
+        kogelX -= 10;
     } else {
         kogelX = spelerX;
         kogelY = spelerY;
@@ -259,6 +260,10 @@ var gameReset = function() {
     grondHoogte = 680;
 }
 
+function preload() {
+  spelerFoto = loadImage('speler.png');
+}
+
 /**
  * setup
  * de code in deze functie wordt één keer uitgevoerd door
@@ -273,6 +278,7 @@ function setup() {
 }
 
 
+
 /**
  * draw
  * de code in deze functie wordt meerdere keren per seconde
@@ -284,6 +290,7 @@ function draw() {
       beweegVijand();
       beweegKogel();
       beweegSpeler();
+      preload();
       setup();  
       tekenVeld();
       tekenPlatform(platformX, platformY);
