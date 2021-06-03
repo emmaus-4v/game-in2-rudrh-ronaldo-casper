@@ -30,7 +30,8 @@ var kogelX = 60;    // x-positie van kogel
 var kogelY = 680;    // y-positie van kogel
 
 var platformX = 200;
-var platformY = 550; 
+var platformY = 555; 
+var platformen = 3;
 
 var vijandX = 250;   // x-positie van vijand
 var vijandY = 680;   // y-positie van vijand
@@ -97,9 +98,12 @@ var tekenSpeler = function(x, y) {
     ellipse(spelerX, spelerY, 50, 50);
 };
 
+
 var tekenPlatform = function(x, y) {
-   fill('red');
-   rect(x, y, 200, 20);
+   for( var i = 0; i <= platformen; i++) {
+    fill('red');
+   rect(x + 250 * i, y, 200, 20);
+   }
 }
 
 /**
@@ -143,7 +147,7 @@ var beweegSpeler = function()  {
          spelerY = spelerY - Math.pow(sprongSnelheid, 2);
          sprongSnelheid = sprongSnelheid + 0.0000008;
      }
-     if (spelerY <= sprongHoogte) {
+     if (spelerY <= sprongHoogte || (spelerY < grondHoogte && springStatus === false)) {
          valStatus = true;
          springStatus = false;
      }
@@ -178,6 +182,7 @@ var checkVijandGeraakt = function() {
      score = score + 20; // wanneer een vijand geraakt is wordt er 20 aan de score toegevoegd
      vijandX = 0;
      vijandY = 0;
+
      
 } 
     
@@ -186,10 +191,14 @@ return false;
 };
 
 var checkPlatformGeraakt = function() {
-    if(spelerX <= platformX + 200 && spelerX >= platformX && keyIsDown(32)) {
-        spelerX = platformX;
-        spelerY = platformY;
+    if(spelerX <= platformX + 210 && spelerX >= platformX && spelerY <= platformY) {
+        spelerX >= platformX;
+        spelerX <= platformX + 200;
+        grondHoogte = platformY - 20;
+    } else {
+        grondHoogte = 680
     }
+    
 }
 
 var beweegKogel = function() {
