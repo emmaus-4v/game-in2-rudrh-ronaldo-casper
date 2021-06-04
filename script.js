@@ -50,7 +50,7 @@ var grondHoogte = 680;
 var mouseWasClicked = false;
 var mouseIsClicked = false;
 
-var spelerFoto = 0
+var spelerFoto = 0;
     
 /* ********************************************* */
 /*      functies die je gebruikt in je game      */
@@ -274,6 +274,10 @@ else {
  }
 };
 
+function preload() {
+    spelerFoto = loadImage('images/speler.png')
+}
+
 var gameReset = function() {
     spelerX = 50; // x-positie van speler
     spelerY = 680; // y-positie van speler
@@ -307,9 +311,7 @@ var gameSetup = function() {
 }
 
 
-function preload() {
-    spelerFoto = loadImage('images/speler.png')
-}
+
 
 /**
  * setup
