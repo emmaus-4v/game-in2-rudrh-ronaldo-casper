@@ -275,7 +275,7 @@ else {
 };
 
 function preload() {
-    spelerFoto = loadImage('images/speler.png')
+    spelerFoto = loadImage('./images/speler.png')
 }
 
 var gameReset = function() {
@@ -377,9 +377,11 @@ function draw() {
          fill(255,255,255)
          textSize(40)
          text('Spelen',550,425,500,450)
-         if(mouseX > 375 && mouseX < 875 && mouseY > 400 && mouseY < 500 && mouseIsPressed){
-             spelStatus = LEVEL1
+         if(mouseX > 375 && mouseX < 875 && mouseY > 400 && mouseY < 500 && mouseIsPressed){ 
+            spelStatus = LEVEL1
+            rect(350,250,500,400)
          }
+
      break;
 
      case WIN:
@@ -405,7 +407,7 @@ function draw() {
         break;
 
         case LEVEL2: 
-         gameSetup()
+        gameSetup()
         break;
     
 
