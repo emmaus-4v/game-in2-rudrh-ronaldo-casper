@@ -37,7 +37,8 @@ var platformen = 3;
 
 var vijandX = 250;   // x-positie van vijand
 var vijandY = 680;   // y-positie van vijand
-var vijanden = ["David", "Roy", "Ronaldo", "Casper", "Niek", "Sam"];
+var vijanden = [1, 1, 1, 1, 1, 1];
+var checkvijand = 0;
 
 var score = 100; // aantal behaalde punten
 
@@ -72,10 +73,16 @@ var tekenVeld = function () {
  * @param {number} y y-coördinaat
  */
 var tekenVijand = function(x, y) {
-    for( var i = 0; i <= vijanden.length; i++) {
-    fill("red");
-    ellipse(x + 100 * i, y, 50, 50);
-    
+    if(vijanden[checkvijand] === 1){
+        for( var i = 0; i <= vijanden.length; i++)
+        fill("red");
+        ellipse(x + 100 * i, y, 50, 50);
+        checkvijand += 1;
+    } else if(vijanden[checkvijand] === 2) {
+        fill(green);
+        rect(x, y, 50, 50);
+    } else if(vijanden[checkvijand] === 0) {
+        return false;
     }
     
 };
@@ -186,10 +193,9 @@ var tekenScore = function() {
   @returns {boolean} true als vijand is geraakt
  */
 var checkVijandGeraakt = function() {  
-  if (kogelX >= vijandX - 25 && kogelX <= vijandX + 25 && kogelY >= vijandY - 25 && kogelY <= vijandY + 25 && checkMouseIsClicked) {
+  if (kogelX >= vijandX - 25 || kogelX <= vijandX + 25 && kogelY >= vijandY - 25 || kogelY <= vijandY + 25 && checkMouseIsClicked) {
      score = score + 20; // wanneer een vijand geraakt is wordt er 20 aan de score toegevoegd
-     vijandX = 0;
-     vijandY = 0;
+     let removedItem = vijanden.splice (checkvijand, 1) 
 
      
 } 
