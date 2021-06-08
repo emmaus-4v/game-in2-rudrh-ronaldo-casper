@@ -37,8 +37,10 @@ var platformen = 3;
 
 var vijandX = 250;   // x-positie van vijand
 var vijandY = 680;   // y-positie van vijand
-var vijanden = [1, 1, 1, 1, 1, 1];
+const vijanden = [1, 1, 1, 1, 1, 1];
 var checkvijand = 0;
+var gevangenX = 100;
+var gevangenY = 100;
 
 var score = 100; // aantal behaalde punten
 
@@ -67,57 +69,58 @@ var tekenVeld = function () {
 };
 
 
-/**
+/*
  * Tekent de vijand
  * @param {number} x x-coördinaat
  * @param {number} y y-coördinaat
  */
-var tekenVijand = function(x, y) {
-    if(vijanden[checkvijand] === 1){
-        for( var i = 0; i <= vijanden.length; i++)
-        fill("red");
-        ellipse(x + 100 * i, y, 50, 50);
-        checkvijand += 1;
-    } else if(vijanden[checkvijand] === 2) {
-        fill(green);
-        rect(x, y, 50, 50);
-    } else if(vijanden[checkvijand] === 0) {
-        return false;
-    }
+var tekenVijand = function() {
     
+    if(vijanden[checkvijand] === 1){
+        fill(255,0,0);
+        ellipse(vijandX, vijandY, 50, 50);
+        checkvijand ++;
+        console.log(checkvijand)
+        console.log(vijandX)
+    } else if(vijanden[checkvijand] === 2) {
+        fill(0,255,0);
+        rect(gevangenX, gevangenY, 50, 50);
+        checkvijand ++;
+    } else if(vijanden[checkvijand] === 0) {
+       checkvijand ++;
+    }    
 };
 
 
-/**
+/*
  * Tekent de kogel of de bal
  * @param {number} x x-coördinaat
  * @param {number} y y-coördinaat
  */
-var tekenKogel = function(x, y) {
+var tekenKogel = function() {
    fill('black');
-   ellipse(x, y, 10, 10);
-
+   ellipse(kogelX, kogelY, 10, 10);
 };
 
 
-/**
+/*
  * Tekent de speler
  * @param {number} x x-coördinaat
  * @param {number} y y-coördinaat
  */
-var tekenSpeler = function(x, y) {
-    image(spelerFoto, x, y, 50, 50);
+var tekenSpeler = function() {
+    image(spelerFoto, spelerX, spelerY, 50, 50);
 };
 
-/**
+/*
  * Tekent de platformen
  * @param {number} x x-coördinaat
  * @param {number} y y-coördinaat
  */
-var tekenPlatform = function(x, y) {
+var tekenPlatform = function() {
    for( var i = 0; i <= platformen; i++) {
     fill('red');
-   rect(x + 250 * i, y, 200, 20);
+    rect(platformX + 250 * i, platformY, 200, 20);
    }
 }
 
@@ -195,12 +198,12 @@ var tekenScore = function() {
 var checkVijandGeraakt = function() {  
   if (kogelX >= vijandX - 25 || kogelX <= vijandX + 25 && kogelY >= vijandY - 25 || kogelY <= vijandY + 25 && checkMouseIsClicked) {
      score = score + 20; // wanneer een vijand geraakt is wordt er 20 aan de score toegevoegd
-     let removedItem = vijanden.splice (checkvijand, 1) 
+    //removedItem = vijanden.splice (checkvijand, 1) 
 
      
-} 
-    
-return false;
+} else {
+    return false;
+}
 
 };
 
@@ -234,7 +237,7 @@ if (mouseIsClicked === true && mouseX > spelerX && kogelX < spelerX + 100) {
  */
 var checkSpelerGeraakt = function() {
         
-        if(vijandX <= spelerX + 45 && vijandY === spelerY && vijandX >= spelerX - 45){
+        if(vijandX <= spelerX + 25 && vijandY === spelerY || vijandX >= spelerX - 25 && vijandY === spelerY){
             score -= 500;
         }  else {
         return false;
@@ -306,10 +309,10 @@ var gameSetup = function() {
     preload();
     setup();  
     tekenVeld();
-    tekenPlatform(platformX, platformY);
-    tekenVijand(vijandX, vijandY);
-    tekenKogel(kogelX, kogelY);
-    tekenSpeler(spelerX, spelerY);
+    tekenPlatform();
+    tekenVijand();
+    tekenKogel();
+    tekenSpeler();
     tekenScore();
     checkVijandGeraakt();
     checkSpelerGeraakt();
