@@ -37,10 +37,8 @@ var platformen = 3;
 
 var vijandX = 250;   // x-positie van vijand
 var vijandY = 680;   // y-positie van vijand
-const vijanden = [1, 1, 1, 1, 1, 1];
-var checkvijand = 0;
-var gevangenX = 100;
-var gevangenY = 100;
+var vijanden = ['David','Roy', 'Ronaldo'];
+
 
 var score = 100; // aantal behaalde punten
 
@@ -76,19 +74,9 @@ var tekenVeld = function () {
  */
 var tekenVijand = function() {
     
-    if(vijanden[checkvijand] === 1){
-        fill(255,0,0);
+    for( var i = 0; i < vijanden.length; i++) {
         ellipse(vijandX, vijandY, 50, 50);
-        checkvijand ++;
-        console.log(checkvijand)
-        console.log(vijandX)
-    } else if(vijanden[checkvijand] === 2) {
-        fill(0,255,0);
-        rect(gevangenX, gevangenY, 50, 50);
-        checkvijand ++;
-    } else if(vijanden[checkvijand] === 0) {
-       checkvijand ++;
-    }    
+    }
 };
 
 
@@ -109,7 +97,7 @@ var tekenKogel = function() {
  * @param {number} y y-coördinaat
  */
 var tekenSpeler = function() {
-    image(spelerFoto, spelerX, spelerY, 50, 50);
+    ellipse(spelerX, spelerY, 50, 50)
 };
 
 /*
@@ -129,13 +117,15 @@ var tekenPlatform = function() {
  */
 var beweegVijand = function() {
 
-     if (spelerX > vijandX) {
+     if (spelerX > vijandX && vijandY > 25) {
         vijandX += 2.5;
-    } else if ( spelerX < vijandX) {
+    } else if ( spelerX < vijandX && vijandY > 25) {
         vijandX -= 2.5;
-    } 
-    
-};
+    } else if(vijandY < 20) {
+            vijandX =  vijandX;
+        }
+
+    };
 
 
 /**
@@ -196,9 +186,11 @@ var tekenScore = function() {
   @returns {boolean} true als vijand is geraakt
  */
 var checkVijandGeraakt = function() {  
-  if (kogelX >= vijandX - 25 || kogelX <= vijandX + 25 && kogelY >= vijandY - 25 || kogelY <= vijandY + 25 && checkMouseIsClicked) {
+  if (kogelX >= vijandX - 25 && kogelX <= vijandX + 25 && kogelY >= vijandY - 25 && kogelY <= vijandY + 25 && mouseIsPressed) {
      score = score + 20; // wanneer een vijand geraakt is wordt er 20 aan de score toegevoegd
-    //removedItem = vijanden.splice (checkvijand, 1) 
+     vijandX = 600;
+     vijandY = 10;
+
 
      
 } else {
@@ -220,9 +212,9 @@ var checkPlatformGeraakt = function() {
 
 var beweegKogel = function() {
 
-if (mouseIsClicked === true && mouseX > spelerX && kogelX < spelerX + 100) {
+if (mouseIsPressed && mouseX > spelerX && kogelX < spelerX + 100) {
     kogelX += 10;
-    } else if (mouseIsClicked === true && mouseX < spelerX && kogelX > spelerX - 100) {
+    } else if (mouseIsPressed === true && mouseX < spelerX && kogelX > spelerX - 100) {
         kogelX -= 10;
        } else {
         kogelX = spelerX;
@@ -237,7 +229,7 @@ if (mouseIsClicked === true && mouseX > spelerX && kogelX < spelerX + 100) {
  */
 var checkSpelerGeraakt = function() {
         
-        if(vijandX <= spelerX + 25 && vijandY === spelerY || vijandX >= spelerX - 25 && vijandY === spelerY){
+        if(vijandX <= spelerX + 50 && vijandY === spelerY && vijandX >= spelerX - 50 && vijandY === spelerY){
             score -= 500;
         }  else {
         return false;
