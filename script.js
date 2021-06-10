@@ -76,7 +76,7 @@ var tekenVeld = function () {
  */
 var tekenVijand = function() {
     
-    if(vijanden[checkvijand] === 1){
+    if(){
         fill(255,0,0);
         ellipse(vijandX, vijandY, 50, 50);
         checkvijand ++;
