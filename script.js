@@ -38,8 +38,12 @@ var platformen = 3;
 
 var vijandX = 250;   // x-positie van vijand
 var vijandY = 680;   // y-positie van vijand
-var vijanden = ['David','Roy', 'Ronaldo'];
+var kleineVijandX = 350;
+var kleineVijandY = 692.5;
+var groteVijandX = 700;
+var groteVijandY = 600;
 
+var groteVijandSize = 200;
 
 var score = 100; // aantal behaalde punten
 
@@ -74,10 +78,10 @@ var tekenVeld = function () {
  * @param {number} y y-coördinaat
  */
 var tekenVijand = function() {
-    
-    for( var i = 0; i < vijanden.length; i++) {
-        ellipse(vijandX, vijandY, 50, 50);
-    }
+   fill('green');
+   ellipse(vijandX, vijandY, 50, 50);
+   ellipse(kleineVijandX, kleineVijandY, 25, 25);
+   ellipse(groteVijandX, groteVijandY, groteVijandSize, groteVijandSize);
 };
 
 
@@ -123,8 +127,25 @@ var beweegVijand = function() {
     } else if ( spelerX < vijandX && vijandY > 25) {
         vijandX -= 2.5;
     } else if(vijandY < 20) {
-            vijandX =  vijandX;
+            vijandX = vijandX;
         }
+
+     if (spelerX > kleineVijandX && kleineVijandY > 12.5) {
+        kleineVijandX += 4;
+    } else if (spelerX < kleineVijandX && kleineVijandY > 12.5) {
+      kleineVijandX -= 4;
+    } else if(kleineVijandY < 20) {
+          kleineVijandX = kleineVijandX;
+        }
+
+         if (spelerX > groteVijandX && groteVijandY > 100) {
+        groteVijandX += 1;
+    } else if (spelerX < groteVijandX && groteVijandY > 100) {
+      groteVijandX -= 1;
+    } else if(groteVijandY < 20) {
+          groteVijandX = groteVijandX;
+        }
+
 
     };
 
@@ -191,11 +212,18 @@ var checkVijandGeraakt = function() {
      score = score + 20; // wanneer een vijand geraakt is wordt er 20 aan de score toegevoegd
      vijandX = 600;
      vijandY = 10;
-
-
-     
-} else {
-    return false;
+ } else if (kogelX >= kleineVijandX - 12.5 && kogelX <= kleineVijandX + 12.5 && kogelY >= kleineVijandY - 12.5 && kogelY <= kleineVijandY + 12.5 && mouseIsPressed) {
+     score = score + 20;
+     kleineVijandX = 600;
+     kleineVijandY = 10;
+ } else if (kogelX >= groteVijandSize - 100 && kogelX <= groteVijandSize + 100 && kogelY >= groteVijandSize - 100 && kogelY <= groteVijandSize + 100 && mouseIsPressed) {
+     score = score + 2;
+     groteVijandSize = 5;
+ } else if (groteVijandSize <= 10){
+     groteVijandX = 600
+     groteVijandY = 10; 
+ } else {
+    return false; 
 }
 
 };
@@ -232,7 +260,12 @@ var checkSpelerGeraakt = function() {
         
         if(vijandX <= spelerX + 50 && vijandY === spelerY && vijandX >= spelerX - 50 && vijandY === spelerY){
             score -= 500;
-        }  else {
+        }  else if(kleineVijandX <= spelerX + 25 && kleineVijandY === spelerY + 12.5 && kleineVijandX >= spelerX - 25 && kleineVijandY === spelerY + 12.5){
+            score -= 500;
+        }  else if(groteVijandX + 200 <= spelerX && groteVijandY - 100 === spelerY && groteVijandX - 200 >= spelerX && groteVijandY + 100 === spelerY){
+            score -= 500;
+        }
+        else {
         return false;
     }
 
@@ -287,6 +320,10 @@ var gameReset = function() {
     kogelY = 680;    // y-positie van kogel
     vijandX = 250;   // x-positie van vijand
     vijandY = 680;   // y-positie van vijand
+    kleineVijandX = 350;
+    kleineVijandY = 692.5;
+    groteVijandX = 700;
+    groteVijandY = 600;
     score = 100; // aantal behaalde punten
     springStatus = false;
     valStatus = false;
