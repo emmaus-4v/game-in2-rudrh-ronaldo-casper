@@ -74,7 +74,12 @@ var tekenVeld = function () {
  */
 var tekenVijand = function() {
     
+<<<<<<< HEAD
     for( var i = 0; i < vijanden.length; i++) {
+=======
+    if(){
+        fill(255,0,0);
+>>>>>>> d59d3467b9adc00daec2acb453b1a5344bce3c73
         ellipse(vijandX, vijandY, 50, 50);
     }
 };
@@ -186,6 +191,7 @@ var tekenScore = function() {
   @returns {boolean} true als vijand is geraakt
  */
 var checkVijandGeraakt = function() {  
+<<<<<<< HEAD
   if (kogelX >= vijandX - 25 && kogelX <= vijandX + 25 && kogelY >= vijandY - 25 && kogelY <= vijandY + 25 && mouseIsPressed) {
      score = score + 20; // wanneer een vijand geraakt is wordt er 20 aan de score toegevoegd
      vijandX = 600;
@@ -193,6 +199,13 @@ var checkVijandGeraakt = function() {
 
 
      
+=======
+  if (kogelX >= vijandX - 25 && kogelY <= vijandY + 25 && checkMouseIsClicked){
+        score = score + 20; // wanneer een vijand geraakt is wordt er 20 aan de score toegevoegd
+    }else if(kogelX <= vijandX + 25 && kogelY >= vijandY && checkMouseIsClicked) {
+     score = score + 20; // wanneer een vijand geraakt is wordt er 20 aan de score toegevoegd
+    
+>>>>>>> d59d3467b9adc00daec2acb453b1a5344bce3c73
 } else {
     return false;
 }
@@ -229,7 +242,11 @@ if (mouseIsPressed && mouseX > spelerX && kogelX < spelerX + 100) {
  */
 var checkSpelerGeraakt = function() {
         
+<<<<<<< HEAD
         if(vijandX <= spelerX + 50 && vijandY === spelerY && vijandX >= spelerX - 50 && vijandY === spelerY){
+=======
+        if(vijandX === spelerX + 25 && vijandY === spelerY || vijandX === spelerX - 25 && vijandY === spelerY){
+>>>>>>> d59d3467b9adc00daec2acb453b1a5344bce3c73
             score -= 500;
         }  else {
         return false;

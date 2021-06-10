@@ -12,11 +12,11 @@ Basis: uitleg, spelen, afgaan en punten
 - [x] punten op scherm zetten 
 - [x] punten kunnen scoren 
 - [ ] uitlegscherm 
-- [ ] beweeg vijand
+- [x] beweeg vijand
 - [x] beweeg kogel
-- [ ] teken speler
+- [x] teken speler
 - [ ] victory of defeat scherm
-- [ ] menuscherm
+- [x] menuscherm
 
 Uitbreiding: *bedenk iets, bijvoorbeeld meer tegenstanders*
 - [ ] *later uitwerken*
