@@ -196,11 +196,11 @@ var tekenScore = function() {
   @returns {boolean} true als vijand is geraakt
  */
 var checkVijandGeraakt = function() {  
-  if (kogelX >= vijandX - 25 || kogelX <= vijandX + 25 && kogelY >= vijandY - 25 || kogelY <= vijandY + 25 && checkMouseIsClicked) {
+  if (kogelX >= vijandX - 25 && kogelY <= vijandY + 25 && checkMouseIsClicked){
+        score = score + 20; // wanneer een vijand geraakt is wordt er 20 aan de score toegevoegd
+    }else if(kogelX <= vijandX + 25 && kogelY >= vijandY && checkMouseIsClicked) {
      score = score + 20; // wanneer een vijand geraakt is wordt er 20 aan de score toegevoegd
-    //removedItem = vijanden.splice (checkvijand, 1) 
-
-     
+    
 } else {
     return false;
 }
@@ -237,7 +237,7 @@ if (mouseIsClicked === true && mouseX > spelerX && kogelX < spelerX + 100) {
  */
 var checkSpelerGeraakt = function() {
         
-        if(vijandX <= spelerX + 25 && vijandY === spelerY || vijandX >= spelerX - 25 && vijandY === spelerY){
+        if(vijandX === spelerX + 25 && vijandY === spelerY || vijandX === spelerX - 25 && vijandY === spelerY){
             score -= 500;
         }  else {
         return false;
