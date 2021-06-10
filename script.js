@@ -392,23 +392,19 @@ function draw() {
      
       case UITLEG:
           background(255,255,255)
-          textSize(60)
+          textSize(50)
           fill(0,0,0)
-          text('Gebruik',50,185,100,200)
-          text('Om te bewegen',700,185,1000,200)
-          for( var i = 0; i < 3; i++) {
-           var toetsX= 300 + i * 125;
-            if(i === 1) {
-                rect(toetsX,50,100,100)
-           }
-            rect(toetsX,175,100,100)
+          text('Gebruik',30,100,100,200)
+          text('Of gebruik linker- en rechterpijltje om te bewegen',480,80,800,200)
+          text('Druk op spatiebar of op pijl-omhoog om te springen',30,250,2000,400)
+          for( var i = 0; i < 2; i++) {
+           var toetsX= 225 + i * 125;
+            rect(toetsX,90,100,100)
            }
            fill(255,255,255)
            textSize(70)
-           text('A',320,185,400,300)
-           text('S',450,185,400,300)
-           text('D',575,185,400,300)
-           text('W',440,60,400,300)
+           text('A',245,100,400,300)
+           text('D',370,100,400,300)
           
       break;
 
