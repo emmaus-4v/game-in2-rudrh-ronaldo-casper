@@ -18,11 +18,12 @@
 /* ********************************************* */
 
 const UITLEG = 0;
-const LEVEL1 = 1;
-const GAMEOVER = 2;
-const MAINMENU = 3;
+const MAINMENU = 1;
+const LEVELMENU = 2;
+const GAMEOVER = 3;
 const WIN = 4;
-const LEVEL2= 5;
+const LEVEL1 = 5;
+const LEVEL2= 6;
 var spelStatus = MAINMENU;
 
 var spelerX = 50; // x-positie van speler
@@ -74,12 +75,7 @@ var tekenVeld = function () {
  */
 var tekenVijand = function() {
     
-<<<<<<< HEAD
     for( var i = 0; i < vijanden.length; i++) {
-=======
-    if(){
-        fill(255,0,0);
->>>>>>> d59d3467b9adc00daec2acb453b1a5344bce3c73
         ellipse(vijandX, vijandY, 50, 50);
     }
 };
@@ -191,7 +187,6 @@ var tekenScore = function() {
   @returns {boolean} true als vijand is geraakt
  */
 var checkVijandGeraakt = function() {  
-<<<<<<< HEAD
   if (kogelX >= vijandX - 25 && kogelX <= vijandX + 25 && kogelY >= vijandY - 25 && kogelY <= vijandY + 25 && mouseIsPressed) {
      score = score + 20; // wanneer een vijand geraakt is wordt er 20 aan de score toegevoegd
      vijandX = 600;
@@ -199,13 +194,6 @@ var checkVijandGeraakt = function() {
 
 
      
-=======
-  if (kogelX >= vijandX - 25 && kogelY <= vijandY + 25 && checkMouseIsClicked){
-        score = score + 20; // wanneer een vijand geraakt is wordt er 20 aan de score toegevoegd
-    }else if(kogelX <= vijandX + 25 && kogelY >= vijandY && checkMouseIsClicked) {
-     score = score + 20; // wanneer een vijand geraakt is wordt er 20 aan de score toegevoegd
-    
->>>>>>> d59d3467b9adc00daec2acb453b1a5344bce3c73
 } else {
     return false;
 }
@@ -242,11 +230,7 @@ if (mouseIsPressed && mouseX > spelerX && kogelX < spelerX + 100) {
  */
 var checkSpelerGeraakt = function() {
         
-<<<<<<< HEAD
         if(vijandX <= spelerX + 50 && vijandY === spelerY && vijandX >= spelerX - 50 && vijandY === spelerY){
-=======
-        if(vijandX === spelerX + 25 && vijandY === spelerY || vijandX === spelerX - 25 && vijandY === spelerY){
->>>>>>> d59d3467b9adc00daec2acb453b1a5344bce3c73
             score -= 500;
         }  else {
         return false;
@@ -383,7 +367,7 @@ function draw() {
         spelStatus = MAINMENU
         gameReset();
         }
-     break;
+        break;
 
      case MAINMENU:
          background(155,255,155);
@@ -391,16 +375,42 @@ function draw() {
          textSize(100)
          text('[Game naam hier]',250,75,1000,300);
          fill(23, 32, 207)
-         rect(375,400,500,100)
+         rect(375,400,500,100) // maakt een knop om een level te kiezen
+         rect(375,550,500,100) // maakt een knop voor het uitlegscherm
          fill(255,255,255)
          textSize(40)
          text('Spelen',550,425,500,450)
+         text('Uitleg',565,575,500,600)
          if(mouseX > 375 && mouseX < 875 && mouseY > 400 && mouseY < 500 && mouseIsPressed){ 
             spelStatus = LEVEL1
             rect(350,250,500,400)
+         } 
+         if(mouseX > 375 && mouseX < 875 && mouseY > 550 && mouseY < 750 && mouseIsPressed) {
+            spelStatus = UITLEG 
          }
-
-     break;
+         break;
+     
+      case UITLEG:
+          background(255,255,255)
+          textSize(60)
+          fill(0,0,0)
+          text('Gebruik',50,185,100,200)
+          text('Om te bewegen',700,185,1000,200)
+          for( var i = 0; i < 3; i++) {
+           var toetsX= 300 + i * 125;
+            if(i === 1) {
+                rect(toetsX,50,100,100)
+           }
+            rect(toetsX,175,100,100)
+           }
+           fill(255,255,255)
+           textSize(70)
+           text('A',320,185,400,300)
+           text('S',450,185,400,300)
+           text('D',575,185,400,300)
+           text('W',440,60,400,300)
+          
+      break;
 
      case WIN:
         fill(59, 156, 17);
@@ -425,10 +435,9 @@ function draw() {
         break;
 
         case LEVEL2: 
-        gameSetup()
-        break;
-    
+         gameSetup()
 
+         break;
 
   }
 }
