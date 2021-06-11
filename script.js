@@ -44,6 +44,8 @@ var groteVijandX = 700;
 var groteVijandY = 600;
 var balkVijandX = 1000;
 var balkVijandY = 400;
+var dierenVijandX = 1100;
+var dierenVijandY = 660
 
 var groteVijandSize = 200;
 
@@ -89,7 +91,14 @@ var tekenVijand = function() {
    ellipse(vijandX, vijandY, 50, 50);
    ellipse(kleineVijandX, kleineVijandY, 25, 25);
    ellipse(groteVijandX, groteVijandY, groteVijandSize, groteVijandSize);
-   rect(balkVijandX, balkVijandY, 150, 50)
+   rect(balkVijandX, balkVijandY, 150, 50);
+   ellipse(dierenVijandX, dierenVijandY, 50, 50);
+   ellipse(dierenVijandX - 25, dierenVijandY + 25, 30, 30);
+   ellipse(dierenVijandX - 50, dierenVijandY + 25, 30, 30);
+   ellipse(dierenVijandX + 25, dierenVijandY + 25, 30, 30);
+   ellipse(dierenVijandX + 50, dierenVijandY + 25, 30, 30);
+   ellipse(dierenVijandX, dierenVijandY + 25, 30, 30);
+  
 };
 
 
@@ -161,7 +170,14 @@ var beweegVijand = function() {
     } else if(balkVijandY < 100) {
           balkVijandX = balkVijandX;
         }
-
+     
+        if (spelerX > dierenVijandX + 25 && dierenVijandY > 100) {
+        dierenVijandX += 2.5;
+    } else if ( spelerX < dierenVijandX - 25 && dierenVijandY > 100) {
+        dierenVijandX -= 2.5;
+    } else if(dierenVijandY < 100) {
+            dierenVijandX = vijandX;
+        }
        
     };
 
