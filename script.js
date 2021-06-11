@@ -28,6 +28,7 @@ const LEVEL3 = 7;
 const LEVEL4 = 8;
 const LEVEL5 = 9;
 var spelStatus = MAINMENU;
+var vorigeSpelStatus = MAINMENU;
 
 var spelerX = 50; // x-positie van speler
 var spelerY = 680; // y-positie van speler
@@ -450,9 +451,12 @@ var gameSetup = function() {
     checkSpelerGeraakt();
     checkPlatformGeraakt();
     if (checkGameOver()) {
-        spelStatus = GAMEOVER;
+        vorigeSpelStatus = spelStatus
+        spelStatus = GAMEOVER
+        
       }
     if (checkWin()) {
+          vorigeSpelStatus = spelStatus
           spelStatus = WIN
       }
 }
@@ -501,7 +505,7 @@ function draw() {
         text('Probeer Opnieuw',275,480,250,525);
         text('Terug naar hoofdmenu',750,480,850,600);
         if(mouseX > 200 && mouseX < 600 && mouseY > 450 && mouseY < 650 && mouseIsClicked){
-        spelStatus = LEVEL1
+        spelStatus = vorigeSpelStatus
         gameReset();
         }
         if(mouseX > 700 && mouseX < 1100 && mouseY > 450 && mouseY < 650 && mouseIsClicked){
@@ -568,9 +572,23 @@ function draw() {
           fill(0,0,0)
           text('Gebruik',30,100,100,200)
           text('Of gebruik linker- en rechterpijltje om te bewegen',480,80,800,200)
-          text('Druk op spatiebar of op pijl-omhoog om te springen',30,250,2000,400)
+          text('Druk op spatiebar of op pijl-omhoog om te springen',30,200,2000,400)
+          text('Ontwijk de vijanden', 30, 275, 800, 500 )
+          text('Druk op de muis om te schieten', 30, 350, 800, 600)
+          text('Elimineer vijanden om punten te verdienen', 30, 425, 2000, 700)
+          text('Als je geraakt wordt verlies je punten', 30, 500, 2000, 1000)
+          text('Als je nul punten hebt, ga je game over ', 30, 575, 2000, 1000)
+          fill(0,0,0)
+          rect(35, 15, 70, 70 )
+          fill(255,0,0)
+          textSize(75)
+          text('X', 45, 10, 50, 75) 
+          if(mouseX > 35 && mouseX < 105 && mouseY > 15 && mouseY < 85 && mouseIsClicked) {
+              spelStatus = MAINMENU
+          }
           for( var i = 0; i < 2; i++) {
            var toetsX= 225 + i * 125;
+            fill(0,0,0)
             rect(toetsX,90,100,100)
            }
            fill(255,255,255)
@@ -593,17 +611,30 @@ function draw() {
         text('Volgend level',300,480,250,525);
         text('Terug naar hoofdmenu',750,480,850,600);
         if(mouseX > 200 && mouseX < 600 && mouseY > 450 && mouseY < 650 && mouseIsClicked){
-        spelStatus = LEVEL1
-        gameReset();
+            if(vorigeSpelStatus === LEVEL1) {
+                spelStatus = LEVEL2
+            }
+            if (vorigeSpelStatus === LEVEL2) {
+                spelStatus = LEVEL3
+            }
+            if (vorigeSpelStatus === LEVEL3) {
+                spelStatus = LEVEL4
+            }
+            if (vorigeSpelStatus === LEVEL4) {
+                spelStatus = LEVEL5
+            }
+        gameReset()
+     
         }
         if(mouseX > 700 && mouseX < 1100 && mouseY > 450 && mouseY < 650 && mouseIsClicked){
         spelStatus = MAINMENU
         gameReset();
         }
+        
         break;
 
       case LEVEL2: 
-         spelerY = 200;
+         spelerY = 200
          gameSetup()
 
          break;
