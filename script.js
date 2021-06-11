@@ -34,10 +34,17 @@ var spelerY = 680; // y-positie van speler
 
 var kogelX = 60;    // x-positie van kogel
 var kogelY = 680;    // y-positie van kogel
+var vijandKogelX = 890;
+var vijandKogelY = 680;
 
 var platformX = 200;
 var platformY = 555; 
-var platformen = 3;
+var kleinePlatformX = 500;
+var kleinePlatformY = 555;
+var grotePlatformX =  700;
+var grotePlatformY = 450;
+var trapPlatformX = 1000;
+var trapPlatformY = 555;
 
 var vijandX = 250;   // x-positie van vijand
 var vijandY = 680;   // y-positie van vijand
@@ -45,10 +52,12 @@ var kleineVijandX = 350;
 var kleineVijandY = 692.5;
 var groteVijandX = 700;
 var groteVijandY = 600;
-var balkVijandX = 1000;
+var balkVijandX = 1050;
 var balkVijandY = 400;
 var dierenVijandX = 1100;
-var dierenVijandY = 660
+var dierenVijandY = 660;
+var schietVijandX = 900;
+var schietVijandY = 680;
 
 var groteVijandSize = 200;
 
@@ -85,6 +94,18 @@ var tekenKooi = function (){
 }
 
 /*
+ * Tekent de kogel of de bal
+ * @param {number} x x-coördinaat
+ * @param {number} y y-coördinaat
+ */
+var tekenKogel = function() {
+   fill('black');
+   ellipse(kogelX, kogelY, 10, 10);
+   ellipse(vijandKogelX, vijandKogelY, 10, 10);
+};
+
+
+/*
  * Tekent de vijand
  * @param {number} x x-coördinaat
  * @param {number} y y-coördinaat
@@ -94,27 +115,16 @@ var tekenVijand = function() {
    ellipse(vijandX, vijandY, 50, 50);
    ellipse(kleineVijandX, kleineVijandY, 25, 25);
    ellipse(groteVijandX, groteVijandY, groteVijandSize, groteVijandSize);
-   rect(balkVijandX, balkVijandY, 150, 50);
+   rect(balkVijandX, balkVijandY, 150, 35);
    ellipse(dierenVijandX, dierenVijandY, 50, 50);
    ellipse(dierenVijandX - 25, dierenVijandY + 25, 30, 30);
    ellipse(dierenVijandX - 50, dierenVijandY + 25, 30, 30);
    ellipse(dierenVijandX + 25, dierenVijandY + 25, 30, 30);
    ellipse(dierenVijandX + 50, dierenVijandY + 25, 30, 30);
    ellipse(dierenVijandX, dierenVijandY + 25, 30, 30);
+   ellipse(schietVijandX, schietVijandY, 50, 50)
   
 };
-
-
-/*
- * Tekent de kogel of de bal
- * @param {number} x x-coördinaat
- * @param {number} y y-coördinaat
- */
-var tekenKogel = function() {
-   fill('black');
-   ellipse(kogelX, kogelY, 10, 10);
-};
-
 
 /*
  * Tekent de speler
@@ -131,10 +141,11 @@ var tekenSpeler = function() {
  * @param {number} y y-coördinaat
  */
 var tekenPlatform = function() {
-   for( var i = 0; i <= platformen; i++) {
     fill('red');
-    rect(platformX + 250 * i, platformY, 200, 20);
-   }
+    rect(platformX, platformY, 200, 20);
+    rect(kleinePlatformX, kleinePlatformY, 140, 20);
+    rect(grotePlatformX, grotePlatformY, 250, 20);
+    rect(trapPlatformX, trapPlatformY, 200, 20);
 }
 
 /**
@@ -167,9 +178,9 @@ var beweegVijand = function() {
         }
         
          if (spelerX > balkVijandX && balkVijandY > 100 && spelerX < balkVijandX + 150 && spelerY > balkVijandY) {
-        balkVijandY += 5;
+        balkVijandY += 10;
     } else if (spelerX > balkVijandX && balkVijandY > 100 && spelerX < balkVijandX + 150 && spelerY < balkVijandY) {
-        balkVijandY -= 5;
+        balkVijandY -= 10;
     } else if(balkVijandY < 100) {
           balkVijandX = balkVijandX;
         }
@@ -180,6 +191,14 @@ var beweegVijand = function() {
         dierenVijandX -= 2.5;
     } else if(dierenVijandY < 100) {
             dierenVijandX = vijandX;
+        } 
+        
+        if (spelerX > schietVijandX && schietVijandY > 100) {
+        schietVijandX += 2.5;
+    } else if ( spelerX < schietVijandX && schietVijandY > 100) {
+        schietVijandX -= 2.5;
+    } else if(vijandY < 100) {
+            schietVijandX = schietVijandX;
         }
        
     };
@@ -273,7 +292,21 @@ var checkVijandGeraakt = function() {
  } else if (groteVijandSize < 25) {
      groteVijandX = 600
      groteVijandY = 92.5; 
- } else {
+ } if (kogelX >= dierenVijandX - 25 && kogelX <= dierenVijandX + 75 && kogelY >= dierenVijandY - 75 && kogelY <= dierenVijandY + 75 && mouseIsPressed) {
+     score = score + 20; 
+     dierenVijandX = 600;
+     dierenVijandY = 75;
+ } if (kogelX >= balkVijandX && kogelX <= balkVijandX + 150 && kogelY >= balkVijandY && kogelY <= balkVijandY + 35  && mouseIsPressed) {
+     score = score + 20;
+     balkVijandX = 600;
+     balkVijandY = 87.5;
+    }  if (kogelX >= schietVijandX - 25 && kogelX <= schietVijandX + 25 && kogelY >= schietVijandY - 25 && kogelY <= schietVijandY + 25 && mouseIsPressed) {
+     score = score + 20; // wanneer een vijand geraakt is wordt er 20 aan de score toegevoegd
+     schietVijandX = 600;
+     schietVijandY = 75;
+     vijandKogelX = 600
+     vijandKogelY = 75
+    } else {
     return false; 
 }
 
@@ -284,6 +317,25 @@ var checkPlatformGeraakt = function() {
         spelerX >= platformX;
         spelerX <= platformX + 200;
         grondHoogte = platformY - 20;
+    } else if(spelerX <= kleinePlatformX + 150 && spelerX >= kleinePlatformX && spelerY <= kleinePlatformY) {
+        spelerX >= kleinePlatformX;
+        spelerX <= kleinePlatformX + 140;
+        grondHoogte = kleinePlatformY - 20;
+    }  else if(spelerX <= grotePlatformX + 260 && spelerX >= grotePlatformX && spelerY <= grotePlatformY) {
+        spelerX >= grotePlatformX;
+        spelerX <= grotePlatformX + 250;
+        grondHoogte = grotePlatformY - 20;
+    }  else if(spelerX <= trapPlatformX + 105 && spelerX >= trapPlatformX && spelerY <= trapPlatformY) {
+        spelerX >= trapPlatformX;
+        spelerX <= trapPlatformX + 200;
+        grondHoogte = trapPlatformY - 20;
+    } else if(spelerX >= trapPlatformX + 105 && spelerY <= trapPlatformY) {
+        trapPlatformX = -100;
+        trapPlatformY = -100;
+        grondHoogte = 680;
+    } else if (grondHoogte >= 680) {
+        trapPlatformX = 1000;
+        trapPlatformY = 555;
     } else {
         grondHoogte = 680
     }
@@ -292,13 +344,23 @@ var checkPlatformGeraakt = function() {
 
 var beweegKogel = function() {
 if (mouseIsPressed && mouseX > spelerX && kogelX < spelerX + 100) {
-    kogelX += 10;
-    } else if (mouseIsPressed === true && mouseX < spelerX && kogelX > spelerX - 100) {
-        kogelX -= 10;
+    kogelX += 8;
+    } else if (mouseIsPressed && mouseX < spelerX && kogelX > spelerX - 100) {
+        kogelX -= 8;
        } else {
         kogelX = spelerX;
         kogelY = spelerY;
     };
+
+    if(spelerX <= schietVijandX && vijandKogelX >= schietVijandX - 70 && vijandKogelY > 100) {
+        vijandKogelX -= 12;
+        vijandKogelX = vijandKogelX;
+    } else if(spelerX >= schietVijandX && vijandKogelX <= schietVijandX + 70 && vijandKogelY > 100) {
+        vijandKogelX += 12;
+        vijandKogelX = vijandKogelX;
+    } else if(vijandKogelX >= schietVijandX - 70 || vijandKogelX <= schietVijandX + 70 && vijandKogelY > 100) {
+        vijandKogelX = schietVijandX - 10;
+    }
 };
 
 /**
@@ -312,7 +374,9 @@ var checkSpelerGeraakt = function() {
             score -= 500;
         }  else if(kleineVijandX <= spelerX + 25 && kleineVijandY === spelerY + 12.5 && kleineVijandX >= spelerX - 25 && kleineVijandY === spelerY + 12.5){
             score -= 500;
-        }  else if(groteVijandX <= spelerX + 200 && groteVijandY === spelerY + 100 && groteVijandX >= spelerX - 100 && groteVijandY === spelerY + 100){
+        }  else if(groteVijandX <= spelerX + 125 && groteVijandY - 100 === spelerY && groteVijandX >= spelerX - 125 && groteVijandY + 100 === spelerY){
+            score -= 500;
+        } else if(dierenVijandX - 90 >= spelerX + 25 && dierenVijandY < spelerY && dierenVijandX + 90 <= spelerX - 25 && dierenVijandY < spelerY){
             score -= 500;
         } else {
         return false;
@@ -378,8 +442,8 @@ var gameSetup = function() {
     tekenVeld();
     tekenKooi();
     tekenPlatform();
-    tekenVijand();
     tekenKogel();
+    tekenVijand();
     tekenSpeler();
     tekenScore();
     checkVijandGeraakt();
