@@ -23,7 +23,10 @@ const LEVELMENU = 2;
 const GAMEOVER = 3;
 const WIN = 4;
 const LEVEL1 = 5;
-const LEVEL2= 6;
+const LEVEL2 = 6;
+const LEVEL3 = 7;
+const LEVEL4 = 8;
+const LEVEL5 = 9;
 var spelStatus = MAINMENU;
 
 var spelerX = 50; // x-positie van speler
@@ -382,6 +385,12 @@ var gameSetup = function() {
     checkVijandGeraakt();
     checkSpelerGeraakt();
     checkPlatformGeraakt();
+    if (checkGameOver()) {
+        spelStatus = GAMEOVER;
+      }
+    if (checkWin()) {
+          spelStatus = WIN
+      }
 }
 
 
@@ -412,12 +421,7 @@ function draw() {
   switch (spelStatus) {
     case LEVEL1:
       gameSetup()
-      if (checkGameOver()) {
-        spelStatus = GAMEOVER;
-      }
-      if (checkWin()) {
-          spelStatus = WIN
-      }
+      
       break;
 
       case GAMEOVER: 
@@ -476,6 +480,18 @@ function draw() {
           if(mouseX > 450 && mouseX < 850 && mouseY > knopY && mouseY < 340 && mouseIsClicked) {
                   spelStatus = LEVEL1
               }
+          if(mouseX > 450 && mouseX < 850 && mouseY > 360 && mouseY < 410 && mouseIsClicked) {
+                  spelStatus = LEVEL2
+              }
+          if(mouseX > 450 && mouseX < 850 && mouseY > 450 && mouseY < 520 && mouseIsClicked) {
+                  spelStatus = LEVEL3
+              }
+          if(mouseX > 450 && mouseX < 850 && mouseY > 540 && mouseY < 610 && mouseIsClicked) {
+                  spelStatus = LEVEL4
+              }
+          if(mouseX > 450 && mouseX < 850 && mouseY > 630 && mouseY < 700 && mouseIsClicked) {
+                  spelStatus = LEVEL5
+              }
           fill(0,0,0)
           textSize(60)
           text('Levels',560,200,600,250)
@@ -523,9 +539,27 @@ function draw() {
         break;
 
       case LEVEL2: 
+         spelerY = 200;
          gameSetup()
 
          break;
+      
+      case LEVEL3: 
+         gameSetup()
+        
+         break;
+
+      case LEVEL4: 
+         gameSetup()
+
+         break;
+
+      case LEVEL5: 
+         gameSetup()
+
+         break;
+
+
 
   }
 }
