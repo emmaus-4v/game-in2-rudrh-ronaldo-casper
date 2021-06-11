@@ -42,6 +42,8 @@ var kleineVijandX = 350;
 var kleineVijandY = 692.5;
 var groteVijandX = 700;
 var groteVijandY = 600;
+var balkVijandX = 1000;
+var balkVijandY = 400;
 
 var groteVijandSize = 200;
 
@@ -72,6 +74,11 @@ var tekenVeld = function () {
 };
 
 
+var tekenKooi = function (){ 
+    fill('yellow');
+    rect(550, 0, 100, 100)
+}
+
 /*
  * Tekent de vijand
  * @param {number} x x-coördinaat
@@ -82,6 +89,7 @@ var tekenVijand = function() {
    ellipse(vijandX, vijandY, 50, 50);
    ellipse(kleineVijandX, kleineVijandY, 25, 25);
    ellipse(groteVijandX, groteVijandY, groteVijandSize, groteVijandSize);
+   rect(balkVijandX, balkVijandY, 150, 50)
 };
 
 
@@ -122,19 +130,19 @@ var tekenPlatform = function() {
  */
 var beweegVijand = function() {
 
-     if (spelerX > vijandX && vijandY > 25) {
+     if (spelerX > vijandX && vijandY > 100) {
         vijandX += 2.5;
-    } else if ( spelerX < vijandX && vijandY > 25) {
+    } else if ( spelerX < vijandX && vijandY > 100) {
         vijandX -= 2.5;
-    } else if(vijandY < 20) {
+    } else if(vijandY < 100) {
             vijandX = vijandX;
         }
 
-     if (spelerX > kleineVijandX && kleineVijandY > 12.5) {
+     if (spelerX > kleineVijandX && kleineVijandY > 100) {
         kleineVijandX += 4;
-    } else if (spelerX < kleineVijandX && kleineVijandY > 12.5) {
+    } else if (spelerX < kleineVijandX && kleineVijandY > 100) {
       kleineVijandX -= 4;
-    } else if(kleineVijandY < 20) {
+    } else if(kleineVijandY < 100) {
           kleineVijandX = kleineVijandX;
         }
 
@@ -142,11 +150,19 @@ var beweegVijand = function() {
         groteVijandX += 1;
     } else if (spelerX < groteVijandX && groteVijandY > 100) {
       groteVijandX -= 1;
-    } else if(groteVijandY < 20) {
+    } else if(groteVijandY < 100) {
           groteVijandX = groteVijandX;
         }
+        
+         if (spelerX > balkVijandX && balkVijandY > 100 && spelerX < balkVijandX + 150 && spelerY > balkVijandY) {
+        balkVijandY += 5;
+    } else if (spelerX > balkVijandX && balkVijandY > 100 && spelerX < balkVijandX + 150 && spelerY < balkVijandY) {
+        balkVijandY -= 5;
+    } else if(balkVijandY < 100) {
+          balkVijandX = balkVijandX;
+        }
 
-
+       
     };
 
 
@@ -226,17 +242,18 @@ var checkVijandGeraakt = function() {
   if (kogelX >= vijandX - 25 && kogelX <= vijandX + 25 && kogelY >= vijandY - 25 && kogelY <= vijandY + 25 && mouseIsPressed) {
      score = score + 20; // wanneer een vijand geraakt is wordt er 20 aan de score toegevoegd
      vijandX = 600;
-     vijandY = 10;
+     vijandY = 75;
  } else if (kogelX >= kleineVijandX - 12.5 && kogelX <= kleineVijandX + 12.5 && kogelY >= kleineVijandY - 12.5 && kogelY <= kleineVijandY + 12.5 && mouseIsPressed) {
      score = score + 20;
      kleineVijandX = 600;
-     kleineVijandY = 10;
- } else if (kogelX >= groteVijandSize - 100 && kogelX <= groteVijandSize + 100 && kogelY >= groteVijandSize - 100 && kogelY <= groteVijandSize + 100 && mouseIsPressed) {
-     score = score + 2;
-     groteVijandSize = 5;
- } else if (groteVijandSize <= 10){
+     kleineVijandY = 87.5;
+ } else if (kogelX >= groteVijandX - (groteVijandSize / 2) && kogelX <= groteVijandX + (groteVijandSize / 2) && kogelY >= groteVijandY - (groteVijandSize / 2) && kogelY <= groteVijandY + (groteVijandSize / 2) && mouseIsPressed) {
+     score = score + 1;
+     groteVijandSize -= 5;
+     groteVijandY += 2.5;
+ } else if (groteVijandSize < 25) {
      groteVijandX = 600
-     groteVijandY = 10; 
+     groteVijandY = 92.5; 
  } else {
     return false; 
 }
@@ -276,10 +293,9 @@ var checkSpelerGeraakt = function() {
             score -= 500;
         }  else if(kleineVijandX <= spelerX + 25 && kleineVijandY === spelerY + 12.5 && kleineVijandX >= spelerX - 25 && kleineVijandY === spelerY + 12.5){
             score -= 500;
-        }  else if(groteVijandX + 200 <= spelerX && groteVijandY - 100 === spelerY && groteVijandX - 200 >= spelerX && groteVijandY + 100 === spelerY){
+        }  else if(groteVijandX <= spelerX + 200 && groteVijandY === spelerY + 100 && groteVijandX >= spelerX - 100 && groteVijandY === spelerY + 100){
             score -= 500;
-        }
-        else {
+        } else {
         return false;
     }
 
@@ -341,6 +357,7 @@ var gameSetup = function() {
     preload();
     setup();  
     tekenVeld();
+    tekenKooi();
     tekenPlatform();
     tekenVijand();
     tekenKogel();
