@@ -28,6 +28,7 @@ const LEVEL3 = 7;
 const LEVEL4 = 8;
 const LEVEL5 = 9;
 var spelStatus = MAINMENU;
+var vorigeSpelStatus = MAINMENU;
 
 var spelerX = 50; // x-positie van speler
 var spelerY = 680; // y-positie van speler
@@ -386,9 +387,12 @@ var gameSetup = function() {
     checkSpelerGeraakt();
     checkPlatformGeraakt();
     if (checkGameOver()) {
-        spelStatus = GAMEOVER;
+        vorigeSpelStatus = spelStatus
+        spelStatus = GAMEOVER
+        
       }
     if (checkWin()) {
+          vorigeSpelStatus = spelStatus
           spelStatus = WIN
       }
 }
@@ -437,7 +441,7 @@ function draw() {
         text('Probeer Opnieuw',275,480,250,525);
         text('Terug naar hoofdmenu',750,480,850,600);
         if(mouseX > 200 && mouseX < 600 && mouseY > 450 && mouseY < 650 && mouseIsClicked){
-        spelStatus = LEVEL1
+        spelStatus = vorigeSpelStatus
         gameReset();
         }
         if(mouseX > 700 && mouseX < 1100 && mouseY > 450 && mouseY < 650 && mouseIsClicked){
@@ -529,22 +533,36 @@ function draw() {
         text('Volgend level',300,480,250,525);
         text('Terug naar hoofdmenu',750,480,850,600);
         if(mouseX > 200 && mouseX < 600 && mouseY > 450 && mouseY < 650 && mouseIsClicked){
-        spelStatus = LEVEL1
-        gameReset();
+            if(vorigeSpelStatus === LEVEL1) {
+                spelStatus = LEVEL2
+            }
+            if (vorigeSpelStatus === LEVEL2) {
+                spelStatus = LEVEL3
+            }
+            if (vorigeSpelStatus === LEVEL3) {
+                spelStatus = LEVEL4
+            }
+            if (vorigeSpelStatus === LEVEL4) {
+                spelStatus = LEVEL5
+            }
+        gameReset()
+     
         }
         if(mouseX > 700 && mouseX < 1100 && mouseY > 450 && mouseY < 650 && mouseIsClicked){
         spelStatus = MAINMENU
         gameReset();
         }
+        
         break;
 
       case LEVEL2: 
-         spelerY = 200;
+         spelerY = 200
          gameSetup()
 
          break;
       
       case LEVEL3: 
+         spelerX = 400;
          gameSetup()
         
          break;
