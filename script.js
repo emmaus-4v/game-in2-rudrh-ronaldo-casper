@@ -310,7 +310,7 @@ else {
 };
 
 function preload() {
-    spelerFoto = loadImage('./images/speler.png')
+    spelerFoto = loadImage('./images/speler.png');
 }
 
 var gameReset = function() {
@@ -385,6 +385,7 @@ function draw() {
       break;
 
       case GAMEOVER: 
+        checkMouseIsClicked()
         fill(207, 53, 23);
         rect(100,100,1100,550); // maakt een rechthoek
         fill(23, 32, 207)
@@ -396,17 +397,18 @@ function draw() {
         textSize(30)
         text('Probeer Opnieuw',275,480,250,525);
         text('Terug naar hoofdmenu',750,480,850,600);
-        if(mouseX > 200 && mouseX < 600 && mouseY > 450 && mouseY < 650 && mouseIsPressed){
+        if(mouseX > 200 && mouseX < 600 && mouseY > 450 && mouseY < 650 && mouseIsClicked){
         spelStatus = LEVEL1
         gameReset();
         }
-        if(mouseX > 700 && mouseX < 1100 && mouseY > 450 && mouseY < 650 && mouseIsPressed){
+        if(mouseX > 700 && mouseX < 1100 && mouseY > 450 && mouseY < 650 && mouseIsClicked){
         spelStatus = MAINMENU
         gameReset();
         }
         break;
 
      case MAINMENU:
+         checkMouseIsClicked()
          background(155,255,155);
          fill(0,0,0);
          textSize(100)
@@ -418,16 +420,37 @@ function draw() {
          textSize(40)
          text('Spelen',550,425,500,450)
          text('Uitleg',565,575,500,600)
-         if(mouseX > 375 && mouseX < 875 && mouseY > 400 && mouseY < 500 && mouseIsPressed){ 
-            spelStatus = LEVEL1
-            rect(350,250,500,400)
+         if(mouseX > 375 && mouseX < 875 && mouseY > 400 && mouseY < 500 && mouseIsClicked){ 
+            spelStatus = LEVELMENU
          } 
          if(mouseX > 375 && mouseX < 875 && mouseY > 550 && mouseY < 750 && mouseIsPressed) {
             spelStatus = UITLEG 
          }
          break;
      
+      case LEVELMENU:
+          checkMouseIsClicked()
+          var knopY= 180;
+          var i = 1;
+          fill(94, 157, 219)
+          rect(200,200,900,510)
+          for(i = 1; i < 6; i++) {
+              fill(217, 171, 46)
+              rect(450,knopY + i * 90,400,70)
+              fill(0,0,0)
+              text('level ' + i, 550, knopY + i * 90,700,900 )
+          }
+          if(mouseX > 450 && mouseX < 850 && mouseY < knopY + i * 90 && mouseIsClicked ) {
+                  spelStatus = LEVEL1
+              }
+          fill(0,0,0)
+          textSize(60)
+          text('Levels',560,200,600,250)
+
+      break;
+
       case UITLEG:
+          checkMouseIsClicked()
           background(255,255,255)
           textSize(50)
           fill(0,0,0)
@@ -446,6 +469,7 @@ function draw() {
       break;
 
      case WIN:
+        checkMouseIsClicked()
         fill(59, 156, 17);
         rect(100,100,1100,550); // maakt een rechthoek
         fill(23, 32, 207)
@@ -457,17 +481,17 @@ function draw() {
         textSize(30)
         text('Volgend level',300,480,250,525);
         text('Terug naar hoofdmenu',750,480,850,600);
-        if(mouseX > 200 && mouseX < 600 && mouseY > 450 && mouseY < 650 && mouseIsPressed){
+        if(mouseX > 200 && mouseX < 600 && mouseY > 450 && mouseY < 650 && mouseIsClicked){
         spelStatus = LEVEL1
         gameReset();
         }
-        if(mouseX > 700 && mouseX < 1100 && mouseY > 450 && mouseY < 650 && mouseIsPressed){
+        if(mouseX > 700 && mouseX < 1100 && mouseY > 450 && mouseY < 650 && mouseIsClicked){
         spelStatus = MAINMENU
         gameReset();
         }
         break;
 
-        case LEVEL2: 
+      case LEVEL2: 
          gameSetup()
 
          break;
