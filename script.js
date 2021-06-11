@@ -272,6 +272,53 @@ var tekenScore = function() {
     score = score - (1/50); //iedere seconde wordt er 1 score weggehaald
 };
 
+var tekenGameOverScherm = function() {
+    fill(207, 53, 23);
+    rect(100,100,1100,550); // maakt een rechthoek
+    fill(23, 32, 207)
+    rect(200,450,400,100) //maakt een knop om opnieuw te spelen
+    rect(700,450,400,100)
+    fill(255,255,255);
+    textSize(100)
+    text('Game Over',400,150,600,450); // Zet de tekst "game over" op de rechthoek
+    textSize(30)
+    text('Probeer Opnieuw',275,480,250,525);
+    text('Terug naar hoofdmenu',750,480,850,600);
+}
+
+var tekenUitlegScherm = function() {
+    background(255,255,255)
+    textSize(50)
+    fill(0,0,0)
+    text('Gebruik',30,100,100,200)
+    text('Of gebruik linker- en rechterpijltje om te bewegen',480,80,800,200)
+    text('Druk op spatiebar of op pijl-omhoog om te springen',30,200,2000,400)
+    text('Ontwijk de vijanden', 30, 275, 800, 500 )
+    text('Druk op de muis om te schieten', 30, 350, 800, 600)
+    text('Elimineer vijanden om punten te verdienen', 30, 425, 2000, 700)
+    text('Als je geraakt wordt verlies je punten', 30, 500, 2000, 1000)
+    text('Als je nul punten hebt, ga je game over ', 30, 575, 2000, 1000)
+    fill(0,0,0)
+    rect(35, 15, 70, 70 )
+    fill(255,0,0)
+    textSize(75)
+    text('X', 45, 10, 50, 75) 
+}
+
+var tekenWinScherm = function() {
+    fill(59, 156, 17);
+    rect(100,100,1100,550); // maakt een rechthoek
+    fill(23, 32, 207)
+    rect(200,450,400,100) //maakt een knop om opnieuw te spelen
+    rect(700,450,400,100)
+    fill(255,255,255);
+    textSize(100)
+    text('Level Voltooid!',325,150,700,450); // Zet de tekst "level voltooid" op de rechthoek
+    textSize(30)
+    text('Volgend level',300,480,250,525);
+    text('Terug naar hoofdmenu',750,480,850,600);
+}
+
 
 /** 
   Zoekt uit of de vijand is geraakt
@@ -493,17 +540,7 @@ function draw() {
       break;
 
       case GAMEOVER: 
-        fill(207, 53, 23);
-        rect(100,100,1100,550); // maakt een rechthoek
-        fill(23, 32, 207)
-        rect(200,450,400,100) //maakt een knop om opnieuw te spelen
-        rect(700,450,400,100)
-        fill(255,255,255);
-        textSize(100)
-        text('Game Over',400,150,600,450); // Zet de tekst "game over" op de rechthoek
-        textSize(30)
-        text('Probeer Opnieuw',275,480,250,525);
-        text('Terug naar hoofdmenu',750,480,850,600);
+        tekenGameOverScherm()
         if(mouseX > 200 && mouseX < 600 && mouseY > 450 && mouseY < 650 && mouseIsClicked){
         spelStatus = vorigeSpelStatus
         gameReset();
@@ -567,22 +604,7 @@ function draw() {
       break;
 
       case UITLEG:
-          background(255,255,255)
-          textSize(50)
-          fill(0,0,0)
-          text('Gebruik',30,100,100,200)
-          text('Of gebruik linker- en rechterpijltje om te bewegen',480,80,800,200)
-          text('Druk op spatiebar of op pijl-omhoog om te springen',30,200,2000,400)
-          text('Ontwijk de vijanden', 30, 275, 800, 500 )
-          text('Druk op de muis om te schieten', 30, 350, 800, 600)
-          text('Elimineer vijanden om punten te verdienen', 30, 425, 2000, 700)
-          text('Als je geraakt wordt verlies je punten', 30, 500, 2000, 1000)
-          text('Als je nul punten hebt, ga je game over ', 30, 575, 2000, 1000)
-          fill(0,0,0)
-          rect(35, 15, 70, 70 )
-          fill(255,0,0)
-          textSize(75)
-          text('X', 45, 10, 50, 75) 
+         tekenUitlegScherm() 
           if(mouseX > 35 && mouseX < 105 && mouseY > 15 && mouseY < 85 && mouseIsClicked) {
               spelStatus = MAINMENU
           }
@@ -599,17 +621,7 @@ function draw() {
       break;
 
      case WIN:
-        fill(59, 156, 17);
-        rect(100,100,1100,550); // maakt een rechthoek
-        fill(23, 32, 207)
-        rect(200,450,400,100) //maakt een knop om opnieuw te spelen
-        rect(700,450,400,100)
-        fill(255,255,255);
-        textSize(100)
-        text('Level Voltooid!',325,150,700,450); // Zet de tekst "level voltooid" op de rechthoek
-        textSize(30)
-        text('Volgend level',300,480,250,525);
-        text('Terug naar hoofdmenu',750,480,850,600);
+        tekenWinScherm()
         if(mouseX > 200 && mouseX < 600 && mouseY > 450 && mouseY < 650 && mouseIsClicked){
             if(vorigeSpelStatus === LEVEL1) {
                 spelStatus = LEVEL2
