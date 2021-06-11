@@ -160,6 +160,21 @@ var beweegVijand = function() {
  * Updatet globale variabele spelerX en spelerY
  */
 
+ var checkMouseIsClicked = function() {
+    if(mouseIsPressed && mouseIsClicked === false && mouseWasClicked === false) {
+        mouseIsClicked = true;
+
+    } else if (mouseIsPressed) {
+        mouseIsClicked = false;
+        mouseWasClicked = true;
+
+    } else {
+        mouseIsClicked = false;
+        mouseWasClicked = false;
+
+    }
+}
+
 var beweegSpeler = function()  {
      if (keyIsDown(68) || keyIsDown(39)) {
         spelerX+= 5;
@@ -240,7 +255,6 @@ var checkPlatformGeraakt = function() {
 }
 
 var beweegKogel = function() {
-
 if (mouseIsPressed && mouseX > spelerX && kogelX < spelerX + 100) {
     kogelX += 10;
     } else if (mouseIsPressed === true && mouseX < spelerX && kogelX > spelerX - 100) {
@@ -272,20 +286,7 @@ var checkSpelerGeraakt = function() {
 };
 
 
-var checkMouseIsClicked = function() {
-    if(mouseIsPressed && mouseIsClicked === false && mouseWasClicked === false) {
-        mouseIsClicked = true;
 
-    } else if (mouseIsPressed) {
-        mouseIsClicked = false;
-        mouseWasClicked = true;
-
-    } else {
-        mouseIsClicked = false;
-        mouseWasClicked = false;
-
-    }
-}
 
 /**
  * Zoekt uit of het spel is afgelopen
@@ -333,6 +334,7 @@ var gameReset = function() {
 }
 
 var gameSetup = function() {
+    checkMouseIsClicked();
     beweegVijand();
     beweegKogel();
     beweegSpeler();
@@ -373,6 +375,7 @@ function setup() {
  * uitgevoerd door de p5 library, nadat de setup functie klaar is
  */
 function draw() {
+  checkMouseIsClicked()
   switch (spelStatus) {
     case LEVEL1:
       gameSetup()
@@ -385,7 +388,6 @@ function draw() {
       break;
 
       case GAMEOVER: 
-        checkMouseIsClicked()
         fill(207, 53, 23);
         rect(100,100,1100,550); // maakt een rechthoek
         fill(23, 32, 207)
@@ -408,7 +410,6 @@ function draw() {
         break;
 
      case MAINMENU:
-         checkMouseIsClicked()
          background(155,255,155);
          fill(0,0,0);
          textSize(100)
@@ -418,18 +419,17 @@ function draw() {
          rect(375,550,500,100) // maakt een knop voor het uitlegscherm
          fill(255,255,255)
          textSize(40)
-         text('Spelen',550,425,500,450)
+         text('Kies level',530,425,500,450)
          text('Uitleg',565,575,500,600)
          if(mouseX > 375 && mouseX < 875 && mouseY > 400 && mouseY < 500 && mouseIsClicked){ 
             spelStatus = LEVELMENU
          } 
-         if(mouseX > 375 && mouseX < 875 && mouseY > 550 && mouseY < 750 && mouseIsPressed) {
+         if(mouseX > 375 && mouseX < 875 && mouseY > 550 && mouseY < 750 && mouseIsClicked) {
             spelStatus = UITLEG 
          }
          break;
      
       case LEVELMENU:
-          checkMouseIsClicked()
           var knopY= 180;
           var i = 1;
           fill(94, 157, 219)
@@ -440,7 +440,7 @@ function draw() {
               fill(0,0,0)
               text('level ' + i, 550, knopY + i * 90,700,900 )
           }
-          if(mouseX > 450 && mouseX < 850 && mouseY < knopY + i * 90 && mouseIsClicked ) {
+          if(mouseX > 450 && mouseX < 850 && mouseY > knopY && mouseY < 340 && mouseIsClicked) {
                   spelStatus = LEVEL1
               }
           fill(0,0,0)
@@ -450,7 +450,6 @@ function draw() {
       break;
 
       case UITLEG:
-          checkMouseIsClicked()
           background(255,255,255)
           textSize(50)
           fill(0,0,0)
@@ -469,7 +468,6 @@ function draw() {
       break;
 
      case WIN:
-        checkMouseIsClicked()
         fill(59, 156, 17);
         rect(100,100,1100,550); // maakt een rechthoek
         fill(23, 32, 207)
