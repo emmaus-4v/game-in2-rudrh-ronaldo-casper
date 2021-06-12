@@ -73,7 +73,6 @@ var grondHoogte = 680;
 var mouseWasClicked = false;
 var mouseIsClicked = false;
 
-var spelerFoto = 0;
     
 /* ********************************************* */
 /*      functies die je gebruikt in je game      */
@@ -83,7 +82,6 @@ var spelerFoto = 0;
  * Tekent het speelveld
  */
 var tekenVeld = function () {
-  fill("white");
   rect(20, 20, width - 2 * 20, height - 2 * 20);
   
 };
@@ -422,10 +420,16 @@ var checkSpelerGeraakt = function() {
             score -= 500;
         }  else if(kleineVijandX <= spelerX + 25 && kleineVijandY === spelerY + 12.5 && kleineVijandX >= spelerX - 25 && kleineVijandY === spelerY + 12.5){
             score -= 500;
-        }  else if(groteVijandX <= spelerX + 125 && groteVijandY - 100 === spelerY && groteVijandX >= spelerX - 125 && groteVijandY + 100 === spelerY){
+        }  else if(groteVijandX <= spelerX + groteVijandSize / 2 && groteVijandY + groteVijandSize / 2 >= spelerY && groteVijandX >= spelerX - groteVijandSize / 2 && groteVijandY - groteVijandSize / 2 < spelerY){
             score -= 500;
-        } else if(dierenVijandX - 90 >= spelerX + 25 && dierenVijandY < spelerY && dierenVijandX + 90 <= spelerX - 25 && dierenVijandY < spelerY){
+        } else if(dierenVijandX <= spelerX + 90 && dierenVijandY + 45 >= spelerY && dierenVijandX  >= spelerX - 90 && dierenVijandY - 25 < spelerY){
             score -= 500;
+        } if(schietVijandX <= spelerX + 50 && schietVijandY === spelerY && schietVijandX >= spelerX - 50 && schietVijandY === spelerY){
+            score -= 500;
+        } if(balkVijandX + 200 >= spelerX && balkVijandY <= spelerY && balkVijandX <= spelerX && balkVijandY + 20 >= spelerY){
+            score -= 500;
+        }  if (vijandKogelX >= spelerX - 25 && vijandKogelX <= spelerX + 25 && vijandKogelY >= spelerY - 25 && vijandKogelY <= spelerY + 25) {
+            score -= 10;
         } else {
         return false;
     }
@@ -457,9 +461,6 @@ else {
  }
 };
 
-function preload() {
-    spelerFoto = loadImage('./images/speler.png');
-}
 
 var gameReset = function() {
     spelerX = 50; // x-positie van speler
@@ -485,7 +486,6 @@ var gameSetup = function() {
     beweegVijand();
     beweegKogel();
     beweegSpeler();
-    preload();
     setup();  
     tekenVeld();
     tekenKooi();
@@ -522,6 +522,7 @@ function setup() {
 
   // Kleur de achtergrond blauw, zodat je het kunt zien
   background('blue');
+
 }
 
 
@@ -646,7 +647,9 @@ function draw() {
         break;
 
       case LEVEL2: 
-         spelerY = 200
+         if(spelerY >= 680 && spelerX >= 200 && spelerX <= 1080) {
+             score -= 500;
+         }
          gameSetup()
 
          break;
