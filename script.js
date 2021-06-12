@@ -34,10 +34,10 @@ var spelerX = 50; // x-positie van speler
 var spelerY = 680; // y-positie van speler
 var spelerSize = 50;
 
-var kogelX = 60;    // x-positie van kogel
-var kogelY = 680;    // y-positie van kogel
-var vijandKogelX = 890;
-var vijandKogelY = 680;
+var kogelX = spelerX + 10;    // x-positie van kogel
+var kogelY = spelerY;    // y-positie van kogel
+var vijandKogelX = schietVijandX - 10;
+var vijandKogelY = schietVijandY;
 
 var platformX = 200;
 var platformY = 555; 
@@ -74,9 +74,15 @@ var grondHoogte = 680;
 var mouseWasClicked = false;
 var mouseIsClicked = false;
 
+var groteMeteorietX = Math.floor(Math.random() * 1280);
+var groteMeteorietY = 0;
+var kleineMeteorietX = spelerX;
+var kleineMeteorietY = 0;
 var meteorietX = Math.floor(Math.random() * 1280);
 var meteorietY = 0;
 var meteorietSize = Math.floor(Math.random() * 100) + 100;
+var kleineMeteorietSize =  Math.floor(Math.random() * 50) + 50;
+var groteMeteorietSize = Math.floor(Math.random() * 150) + 150;
     
 /* ********************************************* */
 /*      functies die je gebruikt in je game      */
@@ -125,7 +131,7 @@ var tekenVijand = function() {
    ellipse(dierenVijandX + 25, dierenVijandY + 25, 30, 30);
    ellipse(dierenVijandX + 50, dierenVijandY + 25, 30, 30);
    ellipse(dierenVijandX, dierenVijandY + 25, 30, 30);
-   ellipse(schietVijandX, schietVijandY, 50, 50)
+   ellipse(schietVijandX, schietVijandY, 50, 50);
   
 };
 
@@ -162,10 +168,11 @@ var tekenZwarteGat = function() {
 }
 
 var tekenMeteoriet = function() {
-    for(var i = 0; i < 3; i++) {
     fill('brown')
-    ellipse(meteorietX * i * 0.6853993, meteorietY, meteorietSize, meteorietSize)
-    }
+    ellipse(meteorietX, meteorietY, meteorietSize, meteorietSize);
+    ellipse(kleineMeteorietX, kleineMeteorietY, kleineMeteorietSize, kleineMeteorietSize);
+    ellipse(groteMeteorietX, groteMeteorietY, groteMeteorietSize, groteMeteorietSize);
+    
 }
 
 /**
@@ -256,10 +263,27 @@ var beweegMeteoriet = function () {
       meteorietSize = Math.floor(Math.random() * 100) + 100;
 
   } 
+  kleineMeteorietY += 10;
+  if (kleineMeteorietY > 820) {
+      kleineMeteorietY = 0
+      kleineMeteorietX = spelerX;
+      kleineMeteorietSize = Math.floor(Math.random() * 50) + 50;
+  } 
+
+   groteMeteorietY += 3;
+  if (groteMeteorietY > 1020) {
+      groteMeteorietY = 0
+      groteMeteorietX = Math.floor(Math.random() * 1280);
+      groteMeteorietSize = Math.floor(Math.random() * 150) + 150;
+  }
 }
 
 var raakMetoriet = function () {
-    if(meteorietX + meteorietSize / 2 >= spelerX && meteorietY - meteorietSize / 2 <= spelerY && meteorietX - meteorietSize / 2 <= spelerX && meteorietY + meteorietSize / 2 >= spelerY){
+    if(meteorietX <= spelerX + meteorietSize / 2 && meteorietY + meteorietSize / 2 >= spelerY && meteorietX >= spelerX - meteorietSize / 2 && meteorietY - meteorietSize / 2 < spelerY){
+            score -= 500;
+    } if(kleineMeteorietX <= spelerX + kleineMeteorietSize / 2 && kleineMeteorietY + kleineMeteorietSize / 2 >= spelerY && kleineMeteorietX >= spelerX - kleineMeteorietSize / 2 && kleineMeteorietY - kleineMeteorietSize / 2 < spelerY){
+            score -= 500;
+    } if(groteMeteorietX <= spelerX + groteMeteorietSize / 2 && groteMeteorietY + groteMeteorietSize / 2 >= spelerY && groteMeteorietX >= spelerX - groteMeteorietSize / 2 && groteMeteorietY - groteMeteorietSize / 2 < spelerY){
             score -= 500;
     }
 }
@@ -380,7 +404,7 @@ var checkVijandGeraakt = function() {
      dierenVijandY = 75;
  } if (kogelX >= balkVijandX && kogelX <= balkVijandX + 150 && kogelY >= balkVijandY && kogelY <= balkVijandY + 35  && mouseIsPressed) {
      score = score + 20;
-     balkVijandX = 600;
+     balkVijandX = 525;
      balkVijandY = 87.5;
     }  if (kogelX >= schietVijandX - 25 && kogelX <= schietVijandX + 25 && kogelY >= schietVijandY - 25 && kogelY <= schietVijandY + 25 && mouseIsPressed) {
      score = score + 20; // wanneer een vijand geraakt is wordt er 20 aan de score toegevoegd
@@ -451,6 +475,10 @@ if (mouseIsPressed && mouseX > spelerX && kogelX < spelerX + 100) {
  * @returns {boolean} true als speler is geraakt
  */
 var checkSpelerGeraakt = function() {
+        if(spelerX < 0){
+            score -= 500;
+
+        }
         
         if(vijandX <= spelerX + 50 && vijandY === spelerY && vijandX >= spelerX - 50 && vijandY === spelerY){
             score -= 500;
@@ -501,14 +529,27 @@ else {
 var gameReset = function() {
     spelerX = 50; // x-positie van speler
     spelerY = 680; // y-positie van speler
-    kogelX = 60;    // x-positie van kogel
-    kogelY = 680;    // y-positie van kogel
+    spelerSize = 50;
+    kogelX = spelerX + 10;    // x-positie van kogel
+    kogelY = spelerY;    // y-positie van kogel
     vijandX = 250;   // x-positie van vijand
     vijandY = 680;   // y-positie van vijand
     kleineVijandX = 350;
     kleineVijandY = 692.5;
     groteVijandX = 700;
     groteVijandY = 600;
+    balkVijandX = 1050;
+    balkVijandY = 400;
+    dierenVijandX = 1100;
+    dierenVijandY = 660;
+    schietVijandX = 900;
+    schietVijandY = 680;
+    vijandKogelX = schietVijandX - 10;
+    vijandKogelY = schietVijandY;
+    groteVijandSize = 200;
+    meteorietY = 0;
+    kleineMeteorietY = 0;
+    groteMeteorietY = 0;
     score = 100; // aantal behaalde punten
     springStatus = false;
     valStatus = false;
@@ -551,14 +592,17 @@ var gameSetupLevel3 = function() {
     checkMouseIsClicked();
     beweegVijand();
     beweegKogel();
+    beweegMeteoriet();
     setup();  
     tekenVeld();
     tekenKooi();
     tekenPlatform();
+    tekenMeteoriet();
     tekenKogel();
     tekenVijand();
     tekenSpeler();
     tekenScore();
+    raakMetoriet();
     checkVijandGeraakt();
     checkSpelerGeraakt();
     checkPlatformGeraakt();
@@ -723,7 +767,7 @@ function draw() {
       if (keyIsDown(65) || keyIsDown(37)) {
         spelerX+= 5;
      } 
-     if (keyIsDown(68) || keyIsDown(39)) {
+     if (keyIsDown(68) && spelerX > 50 || keyIsDown(39) && spelerX > 50) {
         spelerX-= 5;
      } 
      if (springStatus === false) {
