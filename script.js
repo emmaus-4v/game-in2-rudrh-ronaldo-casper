@@ -32,6 +32,7 @@ var vorigeSpelStatus = MAINMENU;
 
 var spelerX = 50; // x-positie van speler
 var spelerY = 680; // y-positie van speler
+var spelerSize = 50;
 
 var kogelX = 60;    // x-positie van kogel
 var kogelY = 680;    // y-positie van kogel
@@ -72,6 +73,9 @@ var grondHoogte = 680;
 
 var mouseWasClicked = false;
 var mouseIsClicked = false;
+
+var meteorietX = Math.floor(Math.random() * 1280);
+var meteorietY = 0;
 
     
 /* ********************************************* */
@@ -131,7 +135,7 @@ var tekenVijand = function() {
  * @param {number} y y-coördinaat
  */
 var tekenSpeler = function() {
-    ellipse(spelerX, spelerY, 50, 50)
+    ellipse(spelerX, spelerY, spelerSize, spelerSize);
 };
 
 /*
@@ -145,6 +149,21 @@ var tekenPlatform = function() {
     rect(kleinePlatformX, kleinePlatformY, 140, 20);
     rect(grotePlatformX, grotePlatformY, 250, 20);
     rect(trapPlatformX, trapPlatformY, 200, 20);
+}
+
+var tekenLava = function() {
+    fill('orange');
+    rect(225, 700, 830, 20);
+}
+
+var tekenZwarteGat = function() {
+    fill('brown');
+    rect(225, 700, 830, 20);
+}
+
+var tekenMeteoriet = function() {
+    fill('brown')
+    ellipse(meteorietX, meteorietY, 200, 200)
 }
 
 /**
@@ -242,16 +261,16 @@ var beweegSpeler = function()  {
          springStatus = true
      }
      if (springStatus === true) {
-         spelerY = spelerY - Math.pow(sprongSnelheid, 2);
-         sprongSnelheid = sprongSnelheid + 0.0000008;
+         spelerY = spelerY - Math.pow(sprongSnelheid + 0.05, 2);
+         sprongSnelheid = sprongSnelheid + 0.00000005;
      }
      if (spelerY <= sprongHoogte || (spelerY < grondHoogte && springStatus === false)) {
          valStatus = true;
          springStatus = false;
      }
      if (valStatus === true && spelerY < grondHoogte) {
-         spelerY = spelerY + Math.pow(sprongSnelheid, 2);
-         sprongSnelheid = sprongSnelheid + 0.0000008;
+         spelerY = spelerY + Math.pow(sprongSnelheid - 0.5, 2);
+         sprongSnelheid = sprongSnelheid + 0.000000008;
      }
      if (spelerY >= grondHoogte) {
          valStatus = false;
@@ -490,6 +509,7 @@ var gameSetup = function() {
     tekenVeld();
     tekenKooi();
     tekenPlatform();
+    tekenMeteoriet();
     tekenKogel();
     tekenVijand();
     tekenSpeler();
@@ -508,6 +528,31 @@ var gameSetup = function() {
       }
 }
 
+var gameSetupLevel3 = function() {
+    checkMouseIsClicked();
+    beweegVijand();
+    beweegKogel();
+    setup();  
+    tekenVeld();
+    tekenKooi();
+    tekenPlatform();
+    tekenKogel();
+    tekenVijand();
+    tekenSpeler();
+    tekenScore();
+    checkVijandGeraakt();
+    checkSpelerGeraakt();
+    checkPlatformGeraakt();
+    if (checkGameOver()) {
+        vorigeSpelStatus = spelStatus
+        spelStatus = GAMEOVER
+        
+      }
+    if (checkWin()) {
+          vorigeSpelStatus = spelStatus
+          spelStatus = WIN
+      }
+}
 
 
 
@@ -650,12 +695,49 @@ function draw() {
          if(spelerY >= 680 && spelerX >= 200 && spelerX <= 1080) {
              score -= 500;
          }
-         gameSetup()
+         gameSetup();
+         tekenLava();
 
          break;
       
       case LEVEL3: 
-         gameSetup()
+      if (keyIsDown(65) || keyIsDown(37)) {
+        spelerX+= 5;
+     } 
+     if (keyIsDown(68) || keyIsDown(39)) {
+        spelerX-= 5;
+     } 
+     if (springStatus === false) {
+         sprongHoogte = spelerY - 250;
+     }
+     if (keyIsDown(32) && springStatus === false && valStatus === false || keyIsDown(38) && springStatus === false && valStatus === false) {
+         springStatus = true
+     }
+     if (springStatus === true) {
+         spelerY = spelerY - Math.pow(sprongSnelheid, 2);
+         sprongSnelheid = sprongSnelheid + 0.0000008;
+     }
+     if (spelerY <= sprongHoogte || (spelerY < grondHoogte && springStatus === false)) {
+         valStatus = true;
+         springStatus = false;
+     }
+     if (valStatus === true && spelerY < grondHoogte) {
+         spelerY = spelerY + Math.pow(sprongSnelheid, 1);
+         sprongSnelheid = sprongSnelheid - 0.0000008;
+     }
+     if (spelerY >= grondHoogte) {
+         valStatus = false;
+         sprongSnelheid = 3;
+         spelerY = grondHoogte;
+     }
+         gameSetupLevel3();
+         tekenZwarteGat();
+           if(spelerY >= 670 && spelerX >= 200 && spelerX <= 1080) {
+             spelerSize -= 0.5;
+         } if (spelerSize <= 10) {
+             score -= 500;
+         }
+         
         
          break;
 
