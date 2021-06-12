@@ -76,7 +76,7 @@ var mouseIsClicked = false;
 
 var meteorietX = Math.floor(Math.random() * 1280);
 var meteorietY = 0;
-
+var meteorietSize = Math.floor(Math.random() * 100) + 100;
     
 /* ********************************************* */
 /*      functies die je gebruikt in je game      */
@@ -162,8 +162,10 @@ var tekenZwarteGat = function() {
 }
 
 var tekenMeteoriet = function() {
+    for(var i = 0; i < 3; i++) {
     fill('brown')
-    ellipse(meteorietX, meteorietY, 200, 200)
+    ellipse(meteorietX * i * 0.6853993, meteorietY, meteorietSize, meteorietSize)
+    }
 }
 
 /**
@@ -244,6 +246,21 @@ var beweegVijand = function() {
         mouseIsClicked = false;
         mouseWasClicked = false;
 
+    }
+}
+var beweegMeteoriet = function () {
+  meteorietY += 5;
+  if (meteorietY > 820) {
+      meteorietY = 0
+      meteorietX = Math.floor(Math.random() * 1280);
+      meteorietSize = Math.floor(Math.random() * 100) + 100;
+
+  } 
+}
+
+var raakMetoriet = function () {
+    if(meteorietX + meteorietSize / 2 >= spelerX && meteorietY - meteorietSize / 2 <= spelerY && meteorietX - meteorietSize / 2 <= spelerX && meteorietY + meteorietSize / 2 >= spelerY){
+            score -= 500;
     }
 }
 
@@ -505,6 +522,7 @@ var gameSetup = function() {
     beweegVijand();
     beweegKogel();
     beweegSpeler();
+    beweegMeteoriet();
     setup();  
     tekenVeld();
     tekenKooi();
@@ -514,6 +532,7 @@ var gameSetup = function() {
     tekenVijand();
     tekenSpeler();
     tekenScore();
+    raakMetoriet();
     checkVijandGeraakt();
     checkSpelerGeraakt();
     checkPlatformGeraakt();
