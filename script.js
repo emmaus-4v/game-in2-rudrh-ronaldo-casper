@@ -38,6 +38,10 @@ var kogelX = spelerX + 10;    // x-positie van kogel
 var kogelY = spelerY;    // y-positie van kogel
 var vijandKogelX = schietVijandX - 10;
 var vijandKogelY = schietVijandY;
+var vijandBaasKogelX = vijandBaasX - 10;
+var vijandBaasKogelY = vijandBaasY;
+
+var vijandKogelSize = 50;
 
 var platformX = 200;
 var platformY = 555; 
@@ -60,8 +64,11 @@ var dierenVijandX = 1100;
 var dierenVijandY = 660;
 var schietVijandX = 900;
 var schietVijandY = 680;
+var vijandBaasX = 1280;
+var vijandBaasY =  500;
 
 var groteVijandSize = 200;
+var vijandBaasSize = 400;
 
 var score = 100; // aantal behaalde punten
 
@@ -110,9 +117,14 @@ var tekenKooi = function (){
 var tekenKogel = function() {
    fill('black');
    ellipse(kogelX, kogelY, 10, 10);
+   fill('green')
    ellipse(vijandKogelX, vijandKogelY, 10, 10);
 };
 
+var baasKogel = function() {
+   fill('gold')
+   ellipse(vijandBaasKogelX, vijandBaasKogelY, vijandKogelSize, vijandKogelSize);
+}
 
 /*
  * Tekent de vijand
@@ -135,12 +147,18 @@ var tekenVijand = function() {
   
 };
 
+var tekenBaas = function() {
+    fill('gold')
+    ellipse(vijandBaasX, vijandBaasY, vijandBaasSize, vijandBaasSize);
+}
+
 /*
  * Tekent de speler
  * @param {number} x x-coördinaat
  * @param {number} y y-coördinaat
  */
 var tekenSpeler = function() {
+    fill('black')
     ellipse(spelerX, spelerY, spelerSize, spelerSize);
 };
 
@@ -224,12 +242,21 @@ var beweegVijand = function() {
         schietVijandX += 2.5;
     } else if ( spelerX < schietVijandX && schietVijandY > 100) {
         schietVijandX -= 2.5;
-    } else if(vijandY < 100) {
+    } else if(schietVijandY < 100) {
             schietVijandX = schietVijandX;
         }
        
     };
 
+    var beweegBaas = function() {
+        if (spelerX > vijandBaasX && vijandBaasY > 100) {
+        vijandBaasX += 0.8;
+    } else if ( spelerX < vijandBaasX && vijandBaasY > 100) {
+        vijandBaasX -= 0.8;
+    } else if(vijandBaasY < 100) {
+            vijandBaasX = vijandBaasX;
+    }
+    }
 
 /**
  * Updatet globale variabelen met positie van kogel of bal
@@ -412,11 +439,22 @@ var checkVijandGeraakt = function() {
      schietVijandY = 75;
      vijandKogelX = 600
      vijandKogelY = 75
-    } else {
+    }  else {
     return false; 
 }
 
 };
+
+var baasGeraakt = function () {
+    if (kogelX >= vijandBaasX - (vijandBaasSize / 2) && kogelX <= vijandBaasX + (vijandBaasSize / 2) && kogelY >= vijandBaasY - (vijandBaasSize / 2) && kogelY <= vijandBaasY + (vijandBaasSize / 2) && mouseIsPressed) {
+     score = score + 50;
+     vijandBaasSize -= 2;
+     vijandBaasY += 1;
+    } if (vijandBaasSize < 50) {
+     vijandBaasX = 600
+     vijandBaasY = 75; 
+    }
+}
 
 var checkPlatformGeraakt = function() {
     if(spelerX <= platformX + 210 && spelerX >= platformX && spelerY <= platformY) {
@@ -468,6 +506,16 @@ if (mouseIsPressed && mouseX > spelerX && kogelX < spelerX + 100) {
         vijandKogelX = schietVijandX - 10;
     }
 };
+
+var beweegBaasKogel = function() {
+    if(spelerX <= vijandBaasX) {
+        vijandBaasKogelX -= 12;
+       
+    } else if(spelerX >= vijandBaasX ) {
+        vijandBaasKogelX += 12;
+       
+    } 
+}
 
 /**
  * Zoekt uit of de speler is geraakt
@@ -616,7 +664,40 @@ var gameSetupLevel3 = function() {
           spelStatus = WIN
       }
 }
-
+      var gameSetupLevel4 = function() {
+    checkMouseIsClicked();
+    beweegVijand();
+    beweegKogel();
+    beweegSpeler();
+    beweegMeteoriet();
+    beweegBaas();
+    beweegBaasKogel();
+    setup();  
+    tekenVeld();
+    tekenKooi();
+    tekenPlatform();
+    tekenMeteoriet();
+    tekenKogel();
+    tekenVijand();
+    tekenBaas();
+    baasKogel();
+    tekenSpeler();
+    tekenScore();
+    raakMetoriet();
+    baasGeraakt();
+    checkVijandGeraakt();
+    checkSpelerGeraakt();
+    checkPlatformGeraakt();
+    if (checkGameOver()) {
+        vorigeSpelStatus = spelStatus
+        spelStatus = GAMEOVER
+        
+      }
+    if (checkWin()) {
+          vorigeSpelStatus = spelStatus
+          spelStatus = WIN
+      }
+}   
 
 
 /**
@@ -805,12 +886,13 @@ function draw() {
          break;
 
       case LEVEL4: 
-         gameSetup()
-
+         gameSetupLevel4();
+         
+        
          break;
 
       case LEVEL5: 
-         gameSetup()
+         gameSetup();
 
          break;
 
