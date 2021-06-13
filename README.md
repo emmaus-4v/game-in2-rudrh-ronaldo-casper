@@ -11,23 +11,33 @@ Basis: uitleg, spelen, afgaan en punten
 - [x] beweeg speler 
 - [x] punten op scherm zetten 
 - [x] punten kunnen scoren 
-- [ ] uitlegscherm 
+- [x] uitlegscherm 
 - [x] beweeg vijand
 - [x] beweeg kogel
 - [x] teken speler
-- [ ] victory of defeat scherm
+- [x] victory of defeat scherm
 - [x] menuscherm
 
 Uitbreiding: *bedenk iets, bijvoorbeeld meer tegenstanders*
-- [ ] *later uitwerken*
-- [ ] *later uitwerken*
-- [ ] *later uitwerken*
+- [x] schiettegenstander
+- [x] tegenstanders met andere uiterlijk
+- [x] meteorieten
+- [x] lava 
+- [x] zwarte gat
+- [x] platformen
+- [x] trapplatform
+- [x] meer levels
+- [x] grote tegenstanden en baas hebben soort van levens
 
 Uitbreiding: *bedenk iets, bijvoorbeeld bewegende achtergrond*
-- [ ] *later uitwerken*
-- [ ] *later uitwerken*
-- [ ] *later uitwerken*
-
+- [ ] afbeelding speler
+- [ ] afbeelding vijanden
+- [ ] afbeelding meteorieten
+- [ ] afbeelding achtergrond
+- [ ] afbeelding platformen
+- [ ] afbeelding kogels
+- [ ] afbeelding lava en zwarte gat 
+- [ ] afbeelding baas
 ## Credits
 - Game template van het Emmauscollege Rotterdam https://github.com/emmauscollege/4HV-game-template
 - manifest.json https://codelabs.developers.google.com/codelabs/your-first-pwapp/#3
