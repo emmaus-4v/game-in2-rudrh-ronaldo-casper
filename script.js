@@ -28,7 +28,7 @@ const LEVEL3 = 7;
 const LEVEL4 = 8;
 const LEVEL5 = 9;
 var spelStatus = MAINMENU;
-var vorigeSpelStatus = MAINMENU;
+var vorigeSpelStatus = MAINMENU; // onthoudt wat de vorige spelStatus was
 
 var spelerX = 50; // x-positie van speler
 var spelerY = 680; // y-positie van speler
@@ -362,19 +362,20 @@ var tekenGameOverScherm = function() {
     rect(100,100,1100,550); // maakt een rechthoek
     fill(23, 32, 207)
     rect(200,450,400,100) //maakt een knop om opnieuw te spelen
-    rect(700,450,400,100)
+    rect(700,450,400,100) // maakt een knop om terug naar het hoofdmenu te gaan
     fill(255,255,255);
     textSize(100)
-    text('Game Over',400,150,600,450); // Zet de tekst "game over" op de rechthoek
+    text('Game Over',400,150,600,450); // Zet de tekst "game over" op rechthoek 1
     textSize(30)
-    text('Probeer Opnieuw',275,480,250,525);
-    text('Terug naar hoofdmenu',750,480,850,600);
+    text('Probeer Opnieuw',275,480,250,525); // Zet de tekst "probeer opnieuw op rechthoek 2"
+    text('Terug naar hoofdmenu',750,480,850,600); // Zet de tekst "terug naar hoffdmenu op rechthoek 3"
 }
 
 var tekenUitlegScherm = function() {
     background(255,255,255)
     textSize(50)
     fill(0,0,0)
+    //Uitleg wordt op het scherm geplaatst
     text('Gebruik',30,100,100,200)
     text('Of gebruik linker- en rechterpijltje om te bewegen',480,80,800,200)
     text('Druk op spatiebar of op pijl-omhoog om te springen',30,200,2000,400)
@@ -384,26 +385,39 @@ var tekenUitlegScherm = function() {
     text('Als je geraakt wordt verlies je punten', 30, 500, 2000, 1000)
     text('Als je nul punten hebt, ga je game over ', 30, 575, 2000, 1000)
     fill(0,0,0)
-    rect(35, 15, 70, 70 )
+    rect(35, 15, 70, 70 ) // maakt een knop om weer uit het uitlegscherm te gaan
     fill(255,0,0)
     textSize(75)
-    text('X', 45, 10, 50, 75) 
+    text('X', 45, 10, 50, 75) // zet een kruisje op de knop om duidelijk te maken dat het uitlegscherm daar verlaten kan worden 
 }
 
 var tekenWinScherm = function() {
     fill(59, 156, 17);
     rect(100,100,1100,550); // maakt een rechthoek
     fill(23, 32, 207)
-    rect(200,450,400,100) //maakt een knop om opnieuw te spelen
-    rect(700,450,400,100)
+    rect(200,450,400,100) //maakt een knop om naar het volgende level te gaan
+    rect(700,450,400,100) // maakt een knop om terug naar het hoofdmenu te gaan
     fill(255,255,255);
     textSize(100)
-    text('Level Voltooid!',325,150,700,450); // Zet de tekst "level voltooid" op de rechthoek
+    text('Level Voltooid!',325,150,700,450); // Zet de tekst "level voltooid" op rechthoek 1
     textSize(30)
-    text('Volgend level',300,480,250,525);
-    text('Terug naar hoofdmenu',750,480,850,600);
+    text('Volgend level',300,480,250,525); // zet de tekst "volgend level" op rechthoek 2
+    text('Terug naar hoofdmenu',750,480,850,600); // zet de tekst "terug naar hoofdmenu op rechthoek 3"
 }
 
+var tekenMainMenu = function() {
+    background(155,255,155); //maakt achtergrond voor mainmenu
+    fill(0,0,0);
+    textSize(100)
+    text('[Game naam hier]',250,75,1000,300); // Zet de naam van onze game in mainmenu
+    fill(23, 32, 207)
+    rect(375,400,500,100) // maakt een knop om een level te kiezen
+    rect(375,550,500,100) // maakt een knop voor het uitlegscherm
+    fill(255,255,255)
+    textSize(40)
+    text('Kies level',530,425,500,450) // Zet de tekst "Kies level" op rechthoek 1
+    text('Uitleg',565,575,500,600) // Zet de tekst "uitleg" op rechthoek 2
+}
 
 /** 
   Zoekt uit of de vijand is geraakt
@@ -573,7 +587,10 @@ else {
  }
 };
 
-
+/**
+gameReset zorgt ervoor dat alle variabelen, zoals posities van vijanden, score etc., worden gereset nadat een level voltooid,
+of nadat de speler het level opnieuw probeert
+*/
 var gameReset = function() {
     spelerX = 50; // x-positie van speler
     spelerY = 680; // y-positie van speler
@@ -606,6 +623,7 @@ var gameReset = function() {
     grondHoogte = 680;
 }
 
+// gameSetup zorgt ervoor dat de basisfuncties van een game makkelijk in meerdere levels te gebruiken zijn.
 var gameSetup = function() {
     checkMouseIsClicked();
     beweegVijand();
@@ -731,10 +749,13 @@ function draw() {
 
       case GAMEOVER: 
         tekenGameOverScherm()
+
+        //Als de muis op de knop "opnieuw spelen" klikt, dan verandert de case naar vorigeSpelstatus
         if(mouseX > 200 && mouseX < 600 && mouseY > 450 && mouseY < 650 && mouseIsClicked){
-        spelStatus = vorigeSpelStatus
+        spelStatus = vorigeSpelStatus // vorigeSpelStatus is in dit geval het level dat de speler aan het spelen was, voordat hij gameover ging
         gameReset();
         }
+        //Als de muis op de knop "terug naar hoofdmenu" klikt, dan gaat de game naar mainmenu 
         if(mouseX > 700 && mouseX < 1100 && mouseY > 450 && mouseY < 650 && mouseIsClicked){
         spelStatus = MAINMENU
         gameReset();
@@ -742,36 +763,31 @@ function draw() {
         break;
 
      case MAINMENU:
-         background(155,255,155);
-         fill(0,0,0);
-         textSize(100)
-         text('[Game naam hier]',250,75,1000,300);
-         fill(23, 32, 207)
-         rect(375,400,500,100) // maakt een knop om een level te kiezen
-         rect(375,550,500,100) // maakt een knop voor het uitlegscherm
-         fill(255,255,255)
-         textSize(40)
-         text('Kies level',530,425,500,450)
-         text('Uitleg',565,575,500,600)
+         tekenMainMenu()
+         //Als de muis op de knop "kies level" klikt, dan gaat de game naar het levelscherm
          if(mouseX > 375 && mouseX < 875 && mouseY > 400 && mouseY < 500 && mouseIsClicked){ 
             spelStatus = LEVELMENU
          } 
+         //Als de muis op de knop "uitleg" klikt, dan gaat de game naar het uitlegscherm
          if(mouseX > 375 && mouseX < 875 && mouseY > 550 && mouseY < 750 && mouseIsClicked) {
             spelStatus = UITLEG 
          }
          break;
      
       case LEVELMENU:
-          var knopY= 180;
-          var i = 1;
+          var knopY= 180; // lokale variable die de y-positie van de 5 knoppen, waarmee je een level kunt kiezen, bepaalt
+          var i = 1; // lokale variable die bepaalt hoeveel keer de aankomende loop is uitgevoerd
           fill(94, 157, 219)
-          rect(200,200,900,510)
+          rect(200,200,900,510) // maakt een groot rechthoek (als menuscherm)
+          
+          //loop die 5 knoppen tekent om de 5 verschillende levels te kiezen
           for(i = 1; i < 6; i++) {
               fill(217, 171, 46)
-              rect(450,knopY + i * 90,400,70)
+              rect(450,knopY + i * 90,400,70) // op basis van de i-waarde wordt de y-wwarde van de knop aangepast, om zo 5 knoppen onder elkaar te tekenen 
               fill(0,0,0)
-              text('level ' + i, 550, knopY + i * 90,700,900 )
+              text('level ' + i, 550, knopY + i * 90,700,900 ) // op basis van de i-waarde wordt te tekst "level" 5 keer onder elkaar getekend. Ook wordt het juiste levelnummer op de juiste plaats gezet met behulp van de i-waarde 
           }
+          //als de muis op een levelnop klikt, dan gaat de game naar de desbetreffende level
           if(mouseX > 450 && mouseX < 850 && mouseY > knopY && mouseY < 340 && mouseIsClicked) {
                   spelStatus = LEVEL1
               }
@@ -789,29 +805,32 @@ function draw() {
               }
           fill(0,0,0)
           textSize(60)
-          text('Levels',560,200,600,250)
+          text('Levels',560,200,600,250) // zet de tekst "levels", als titel op het scherm
 
       break;
 
       case UITLEG:
          tekenUitlegScherm() 
+         //als de muis klikt op de 'sluit' knop, dan gaat de game terug naar het hoofdmenu
           if(mouseX > 35 && mouseX < 105 && mouseY > 15 && mouseY < 85 && mouseIsClicked) {
               spelStatus = MAINMENU
           }
+          //Deze loop tekent twee toetsen van het toetsenbord ter ondersteuning van de uitleg
           for( var i = 0; i < 2; i++) {
-           var toetsX= 225 + i * 125;
+           var toetsX= 225 + i * 125; //aan de hand van de i-waarde wordt bepaald bij welke x-as de volgende toets getekend moet worden
             fill(0,0,0)
             rect(toetsX,90,100,100)
            }
            fill(255,255,255)
            textSize(70)
-           text('A',245,100,400,300)
-           text('D',370,100,400,300)
+           text('A',245,100,400,300) //Zet de letter "A" op de linkertoets
+           text('D',370,100,400,300) //Zet de letter "D" op de rechtertoets
           
       break;
 
      case WIN:
         tekenWinScherm()
+        //als de muis klikt op de knop "volgende level",dan wordt aan de hand van het vorige level bepaald wat het volgende level moet zijn, vervolgens gaat de game dan naar dat level
         if(mouseX > 200 && mouseX < 600 && mouseY > 450 && mouseY < 650 && mouseIsClicked){
             if(vorigeSpelStatus === LEVEL1) {
                 spelStatus = LEVEL2
@@ -828,6 +847,7 @@ function draw() {
         gameReset()
      
         }
+        //Als de muis op de knop "terug naar hoofdmenu" klikt, dan gaat de game naar mainmenu 
         if(mouseX > 700 && mouseX < 1100 && mouseY > 450 && mouseY < 650 && mouseIsClicked){
         spelStatus = MAINMENU
         gameReset();
