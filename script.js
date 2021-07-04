@@ -411,7 +411,6 @@ var beweegMeteoriet = function () {
     }
 };
 
-<<<<<<< HEAD
 /**
  * functie die ervoor zorgt dat we de muis niet moeten indrukken, maar klikken 
  */
@@ -442,7 +441,6 @@ var raakMeteoriet = function () {
             score -= 500;
     }
 };
-=======
 var tekenGameOverScherm = function() {
     fill(207, 53, 23);
     rect(100,100,1100,550); // maakt een rechthoek
@@ -490,7 +488,6 @@ var tekenWinScherm = function() {
     text('Volgend level',300,480,250,525); // zet de tekst "volgend level" op rechthoek 2
     text('Terug naar hoofdmenu',750,480,850,600); // zet de tekst "terug naar hoofdmenu op rechthoek 3"
 }
->>>>>>> fd2c81c4505dbb00e3773d416dbf3c7e90c6e4cb
 
 var tekenMainMenu = function() {
     background(155,255,155); //maakt achtergrond voor mainmenu
@@ -687,17 +684,10 @@ var checkWinLevel5 = function() {
    }
 };
 
-<<<<<<< HEAD
-
-/**
- * Zet alle vijanden terug op de juiste posities als het wordt geroepen
- */
-=======
 /**
 gameReset zorgt ervoor dat alle variabelen, zoals posities van vijanden, score etc., worden gereset nadat een level voltooid,
 of nadat de speler het level opnieuw probeert
 */
->>>>>>> fd2c81c4505dbb00e3773d416dbf3c7e90c6e4cb
 var gameReset = function() {
     spelerX = 50; 
     spelerY = 680; 
@@ -738,13 +728,10 @@ var gameReset = function() {
     grondHoogte = 680;
 };
 
-<<<<<<< HEAD
 /**
  * De functies worden geroepen die nodig zijn
  */
-=======
 // gameSetup zorgt ervoor dat de basisfuncties van een game makkelijk in meerdere levels te gebruiken zijn.
->>>>>>> fd2c81c4505dbb00e3773d416dbf3c7e90c6e4cb
 var gameSetup = function() {
     checkMouseIsClicked();
     beweegVijand();
@@ -901,21 +888,16 @@ function draw() {
 
         //Als de muis op de knop "opnieuw spelen" klikt, dan verandert de case naar vorigeSpelstatus
         if(mouseX > 200 && mouseX < 600 && mouseY > 450 && mouseY < 650 && mouseIsClicked){
-        spelStatus = vorigeSpelStatus // vorigeSpelStatus is in dit geval het level dat de speler aan het spelen was, voordat hij gameover ging
+        spelStatus = vorigeSpelStatus; // vorigeSpelStatus is in dit geval het level dat de speler aan het spelen was, voordat hij gameover ging
         gameReset();
-<<<<<<< HEAD
-        } 
-=======
         }
         //Als de muis op de knop "terug naar hoofdmenu" klikt, dan gaat de game naar mainmenu 
->>>>>>> fd2c81c4505dbb00e3773d416dbf3c7e90c6e4cb
         if(mouseX > 700 && mouseX < 1100 && mouseY > 450 && mouseY < 650 && mouseIsClicked){
-        spelStatus = MAINMENU
+        spelStatus = MAINMENU;
         gameReset();
         }
         break;
 
-<<<<<<< HEAD
         case MAINMENU:
          background(155,255,155);
          fill(0,0,0);
@@ -928,11 +910,6 @@ function draw() {
          textSize(40)
          text('Kies level',530,425,500,450)
          text('Uitleg',565,575,500,600)
-=======
-     case MAINMENU:
-         tekenMainMenu()
-         //Als de muis op de knop "kies level" klikt, dan gaat de game naar het levelscherm
->>>>>>> fd2c81c4505dbb00e3773d416dbf3c7e90c6e4cb
          if(mouseX > 375 && mouseX < 875 && mouseY > 400 && mouseY < 500 && mouseIsClicked){ 
             spelStatus = LEVELMENU
          } 
@@ -942,15 +919,9 @@ function draw() {
          }
          break;
      
-<<<<<<< HEAD
-         case LEVELMENU:
-          var knopY= 180;
-          var i = 1;
-=======
       case LEVELMENU:
           var knopY= 180; // lokale variable die de y-positie van de 5 knoppen, waarmee je een level kunt kiezen, bepaalt
           var i = 1; // lokale variable die bepaalt hoeveel keer de aankomende loop is uitgevoerd
->>>>>>> fd2c81c4505dbb00e3773d416dbf3c7e90c6e4cb
           fill(94, 157, 219)
           rect(200,200,900,510) // maakt een groot rechthoek (als menuscherm)
           
@@ -979,13 +950,6 @@ function draw() {
              }
           fill(0,0,0)
           textSize(60)
-<<<<<<< HEAD
-          text('Levels',560,200,600,250)
-          break;
-
-          case UITLEG:
-          tekenUitlegScherm() 
-=======
           text('Levels',560,200,600,250) // zet de tekst "levels", als titel op het scherm
 
       break;
@@ -993,28 +957,11 @@ function draw() {
       case UITLEG:
          tekenUitlegScherm() 
          //als de muis klikt op de 'sluit' knop, dan gaat de game terug naar het hoofdmenu
->>>>>>> fd2c81c4505dbb00e3773d416dbf3c7e90c6e4cb
           if(mouseX > 35 && mouseX < 105 && mouseY > 15 && mouseY < 85 && mouseIsClicked) {
               spelStatus = MAINMENU
           }
           //Deze loop tekent twee toetsen van het toetsenbord ter ondersteuning van de uitleg
           for( var i = 0; i < 2; i++) {
-<<<<<<< HEAD
-          var toetsX= 225 + i * 125;
-          fill(0,0,0)
-          rect(toetsX,90,100,100)
-          }
-          fill(255,255,255)
-          textSize(70)
-          text('A',245,100,400,300)
-          text('D',370,100,400,300)
-          break;
-
-          case WIN:
-          tekenWinScherm()
-          if(mouseX > 200 && mouseX < 600 && mouseY > 450 && mouseY < 650 && mouseIsClicked){
-          if(vorigeSpelStatus === LEVEL1) {
-=======
            var toetsX= 225 + i * 125; //aan de hand van de i-waarde wordt bepaald bij welke x-as de volgende toets getekend moet worden
             fill(0,0,0)
             rect(toetsX,90,100,100)
@@ -1031,7 +978,6 @@ function draw() {
         //als de muis klikt op de knop "volgende level",dan wordt aan de hand van het vorige level bepaald wat het volgende level moet zijn, vervolgens gaat de game dan naar dat level
         if(mouseX > 200 && mouseX < 600 && mouseY > 450 && mouseY < 650 && mouseIsClicked){
             if(vorigeSpelStatus === LEVEL1) {
->>>>>>> fd2c81c4505dbb00e3773d416dbf3c7e90c6e4cb
                 spelStatus = LEVEL2
           }
           if (vorigeSpelStatus === LEVEL2) {
@@ -1042,16 +988,6 @@ function draw() {
           }
           if (vorigeSpelStatus === LEVEL4) {
                 spelStatus = LEVEL5
-<<<<<<< HEAD
-          }
-          gameReset()
-          }
-          if(mouseX > 700 && mouseX < 1100 && mouseY > 450 && mouseY < 650 && mouseIsClicked){
-          spelStatus = MAINMENU
-          gameReset();
-          }
-          break;
-=======
             }
         gameReset()
      
@@ -1063,7 +999,6 @@ function draw() {
         }
         
         break;
->>>>>>> fd2c81c4505dbb00e3773d416dbf3c7e90c6e4cb
 
           case LEVEL2: 
           if(spelerY >= 680 && spelerX >= 200 && spelerX <= 1080) {
